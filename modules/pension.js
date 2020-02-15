@@ -17,15 +17,14 @@ const pension = () => {
     ipc_file[0].data[12].forEach((element) => {
       headers.push(element);
     });
-
     // Data of IPC montly since 1956
     ipc_file[0].data.forEach((element, index) => {
       if (index >= 13 && index <= 781) {
+        // const ipcs = [element[1], element[2], element[3], element[4]];
         data.push(element);
       }
     });
   };
-
   // Esta myPension es usada para acceder a metodos
   const myPension = {};
 
