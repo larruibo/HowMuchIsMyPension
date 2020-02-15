@@ -1,0 +1,8 @@
+<h1>Hello, <span style="color: blue; font-size: large;">{{vars.headers}}</span> </h1>
+<br>
+
+<ul id="list-pension">
+  {{#each vars.data }}
+  <li>{{@index}}: {{this}}</li>
+  {{/each}}
+</ul>
