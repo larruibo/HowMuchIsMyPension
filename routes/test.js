@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
     'headers': ipc.headers(),
   };
   // Renderiza pagina en views/test.hbs y el objeto vars
-  res.render('test', { 'vars': vars });
+  res.render('base', { 'vars': vars });
 });
 
 module.exports = router;

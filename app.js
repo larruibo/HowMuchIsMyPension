@@ -12,8 +12,8 @@ var app = express();
 
 // Define paths for Express
 const publicPath = path.join(__dirname, 'public');
-const viewsPath = path.join(__dirname, '/templates/partials');
-const partialsPath = path.join(__dirname, '/templates/views');
+const viewsPath = path.join(__dirname, '/templates/views');
+const partialsPath = path.join(__dirname, '/templates/partials');
 
 // Setup HBS engine and views locations
 app.set('view engine', 'hbs');
