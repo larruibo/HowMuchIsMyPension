@@ -1,8 +1,22 @@
 <h1>Hello, <span style="color: blue; font-size: large;">{{vars.headers}}</span> </h1>
 <br>
+<div class="container">
+  <div class="row d-flex justify-content-around">
+    <h4 class="login-heading mb-4">Añadir cotización</h4>
+    <h4 class="login-heading mb-4">Mes-Año</h4>
+  </div>
+  <div class="row d-flex justify-content-around">
+    <input class="col-3 m-2" type="number" id="inputCotizacion" class="form-control" placeholder="300000">
+    <input class="col-3 m-2" type="month" id="inputDate" class="form-control" value="2018-05" min="1956-01">
+  </div>
+  <div class="row">
+    <button id="calculateBtn" type="button" class="btn btn-primary">Submit</button>
+  </div>
+</div>
 
-<ul id="list-pension">
+<script src="/scripts/calculatePension.js"></script>
+{{!-- <ul id="list-pension">
   {{#each vars.data }}
   <li>{{@index}}: {{this}}</li>
   {{/each}}
-</ul>
+</ul> --}}
