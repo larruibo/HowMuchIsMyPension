@@ -11,7 +11,9 @@ const pension = () => {
   const headers = [];
   // Data que contiene los ipcs
   const data = [];
-
+  
+  // Esta myPension es usada para acceder a metodos
+  const myPension = {};
   // Adding headers the columns of the data
   const load_data = () => {
     ipc_file[0].data[12].forEach((element) => {
@@ -25,8 +27,7 @@ const pension = () => {
       }
     });
   };
-  // Esta myPension es usada para acceder a metodos
-  const myPension = {};
+  
 
   myPension.data = () => data;
 
@@ -36,7 +37,7 @@ const pension = () => {
 
   myPension.ipc_file = () => ipc_file;
 
-  myPension.load_data = load_data();
+  myPension.load_data = load_data;
 
   return myPension;
 };

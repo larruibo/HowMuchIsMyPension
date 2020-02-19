@@ -1,15 +1,16 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-let pension = require('../modules/pension');
+let pension = require("../modules/pension");
 
-router.get('/', function (req, res) {
+router.get("/", function (req, res) {
   let ipc = pension();
+  ipc.load_data();
   const vars = {
-    'data': ipc.data(),
-    'headers': ipc.headers(),
+    "data": ipc.data(),
+    "headers": ipc.headers(),
   };
   // Renderiza pagina en views/test.hbs y el objeto vars
-  res.render('base', { 'vars': vars });
+  res.render("base", { "vars": vars });
 });
 
 module.exports = router;
