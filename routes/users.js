@@ -1,10 +1,13 @@
-// Is this file necessary?
 var express = require("express");
 var router = express.Router();
 
 /* GET users listing. */
-router.get("/", function(req, res, next) {
-  res.send("respond with a resource");
+router.get("/", function(req, res) {
+  res.render("userPage");
+});
+
+router.get("/tables", function(req, res) {
+  res.render("tables");
 });
 
 module.exports = router;

@@ -5,7 +5,7 @@ var logger = require("morgan");
 const hbs = require("hbs");
 
 var indexRouter = require("./routes/index");
-// var usersRouter = require('./routes/users');
+var usersRouter = require("./routes/users");
 const testRouter = require("./routes/test");
 
 var app = express();
@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(publicPath));
 
 app.use("/", indexRouter);
-// app.use('/users', usersRouter);
+app.use("/dashboard", usersRouter);
 // Route para pruebas con node
 app.use("/test", testRouter);
 
