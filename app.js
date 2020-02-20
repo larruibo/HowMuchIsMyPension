@@ -1,11 +1,13 @@
+// Packages and modules 
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const hbs = require("hbs");
 
+// Routers
 var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+var dashboardRouter = require("./routes/dashboard");
 const testRouter = require("./routes/test");
 
 var app = express();
@@ -26,8 +28,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(publicPath));
 
+// Ruta de index
 app.use("/", indexRouter);
-app.use("/dashboard", usersRouter);
+// Ruta de dashboard
+app.use("/dashboard", dashboardRouter);
 // Route para pruebas con node
 app.use("/test", testRouter);
 
