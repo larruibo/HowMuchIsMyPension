@@ -8,7 +8,6 @@ const hbs = require("hbs");
 // Routers
 var indexRouter = require("./routes/index");
 var dashboardRouter = require("./routes/dashboard");
-const testRouter = require("./routes/test");
 
 var app = express();
 
@@ -32,7 +31,5 @@ app.use(express.static(publicPath));
 app.use("/", indexRouter);
 // Ruta de dashboard
 app.use("/dashboard", dashboardRouter);
-// Route para pruebas con node
-app.use("/test", testRouter);
 
 module.exports = app;
