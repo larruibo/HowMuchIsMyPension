@@ -39,9 +39,9 @@
             <div class="card-header py-3">
               <button id="butAgregar" class="collapsible m-0 font-weight-bold text-primary" add="true">Agregar</button>
               <button id="butEliminar" class="collapsible m-0 font-weight-bold text-primary" add="true">Eliminar</button>
-              
+
               <div class="row m-1"></div>
-              <div id="content-input" class="content ml-3" style="display: none;">
+              <div id="content-input-agregar" class="content ml-3" style="display: none;">
                 <div class="row mb-2">
                   <label for="iCotizacion">Cotizacion:</label>
                   <input class="ml-2" type="number" value="1000000" name="iCotizacion" id="iCotizacion">
@@ -54,8 +54,13 @@
                   <input class="ml-3" id="iMesAnio" name="iMesAnio" type="month" value="2020-01" min="1954-01"
                     max="2020-01">
                 </div>
-                <div class="row"></div>
-
+              <button id="butEnviar" class="m-0 font-weight-bold text-primary">Enviar</button>
+              </div>
+              <div id="content-input-eliminar" style="display: none;">
+                <div class="row mb-2">
+                  <label for="iSemanaCotizada">Seleccione la semana cotizada:</label>
+                  <input class="ml-2" type="number" value="1" name="iSemanaCotizada" id="iSemanaCotizada">
+                </div>
               </div>
             </div>
             <div class="card-body">

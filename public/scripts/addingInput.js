@@ -1,28 +1,57 @@
 const butAgregar = document.getElementById("butAgregar");
 const butEliminar = document.getElementById("butEliminar");
-const div = document.getElementById("content-input");
-butAgregar.addEventListener("click", () => {
-  // butAgregar.setAttribute("disabled", "disabled");
-  butAgregar.classList.toggle("true");
 
-  if (butAgregar.getAttribute("add") === "true") {
+const divAgregar = document.getElementById("content-input-agregar");
+const divEliminar = document.getElementById("content-input-eliminar");
+
+const butEnviar = document.getElementById("butEnviar");
+
+butEnviar.addEventListener("click", () => {
+  addData();
+});
+
+butEliminar.addEventListener("click", () => {
+  butEliminar.classList.toggle("true");
+
+  if (butEliminar.getAttribute("add") === "true") {
     console.log("true");
-    addInput(butAgregar);
-    div.setAttribute("style", "display: block;");
-
+    divEliminar.setAttribute("style", "display: block;");
+    butEliminar.setAttribute("add", "false");
+    butAgregar.setAttribute("disabled", "disabled");
+    let trs = document.querySelectorAll("tbody > tr");
+    let iSemanaCotizada = document.getElementById("iSemanaCotizada");
+    if (trs.length === 0) {
+      iSemanaCotizada.setAttribute("disabled", "disabled");
+    }
+    else{
+      iSemanaCotizada.removeAttribute("disabled");
+    }
   }
   else {
     console.log("false");
-    addData(butAgregar);
-    div.setAttribute("style", "display: none;");
+    divEliminar.setAttribute("style", "display: none;");
+    butEliminar.setAttribute("add", "true");
+    butAgregar.removeAttribute("disabled");
+  }
+});
+
+butAgregar.addEventListener("click", () => {
+  butAgregar.classList.toggle("true");
+
+  if (butAgregar.getAttribute("add") === "true") {
+    butAgregar.setAttribute("add", "false");
+    divAgregar.setAttribute("style", "display: block;");
+    butEliminar.setAttribute("disabled", "disabled");
+  }
+  else {
+    divAgregar.setAttribute("style", "display: none;");
+    butAgregar.setAttribute("add", "true");
+    butEliminar.removeAttribute("disabled");
   }
 
 });
 
-function addData(butAgregar) {
-
-  butAgregar.setAttribute("add", "true");
-
+function addData() {
 
   let tbody = document.getElementById("table-content");
   let tr = document.createElement("tr");
@@ -59,13 +88,9 @@ function addData(butAgregar) {
   let tdList = document.querySelectorAll("tbody > tr");
   tds[4].textContent = tdList.length;
 
-  tds.forEach( (td) => {
+  tds.forEach((td) => {
     tr.appendChild(td);
   });
-}
-
-function addInput(butAgregar) {
-  butAgregar.setAttribute("add", "false");
 }
 
 // Split from "2019-10" to arr = [2019, 10]
