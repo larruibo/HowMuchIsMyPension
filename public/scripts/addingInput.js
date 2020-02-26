@@ -1,13 +1,19 @@
 const butAgregar = document.getElementById("butAgregar");
 const butEliminar = document.getElementById("butEliminar");
+const butEnviar = document.getElementById("butEnviar");
+const butQuitar = document.getElementById("butQuitar");
 
 const divAgregar = document.getElementById("content-input-agregar");
 const divEliminar = document.getElementById("content-input-eliminar");
 
-const butEnviar = document.getElementById("butEnviar");
 
 butEnviar.addEventListener("click", () => {
   addData();
+});
+
+butQuitar.addEventListener("click", () => {
+  let input = document.getElementById("iSemanaCotizada");
+  eliminarData(input);
 });
 
 butEliminar.addEventListener("click", () => {
@@ -22,9 +28,11 @@ butEliminar.addEventListener("click", () => {
     let iSemanaCotizada = document.getElementById("iSemanaCotizada");
     if (trs.length === 0) {
       iSemanaCotizada.setAttribute("disabled", "disabled");
+      butQuitar.setAttribute("disabled", "disabled");
     }
-    else{
+    else {
       iSemanaCotizada.removeAttribute("disabled");
+      butQuitar.removeAttribute("disabled");
     }
   }
   else {
@@ -34,6 +42,8 @@ butEliminar.addEventListener("click", () => {
     butAgregar.removeAttribute("disabled");
   }
 });
+
+
 
 butAgregar.addEventListener("click", () => {
   butAgregar.classList.toggle("true");
@@ -87,6 +97,7 @@ function addData() {
 
   let tdList = document.querySelectorAll("tbody > tr");
   tds[4].textContent = tdList.length;
+  tr.setAttribute("id", tdList.length + "");
 
   tds.forEach((td) => {
     tr.appendChild(td);
@@ -100,3 +111,27 @@ const darAnioMes = anioMes => {
   arr[1] = parseInt(arr[1]);
   return arr;
 };
+
+function eliminarData(input) {
+  let tr = document.getElementById(input.value);
+  let trs = document.querySelectorAll("tbody > tr");
+
+  let iSemanaCotizada = document.getElementById("iSemanaCotizada");
+  if (trs.length-1 === 0) {
+    iSemanaCotizada.setAttribute("disabled", "disabled");
+    butQuitar.setAttribute("disabled", "disabled");
+  }
+  else {
+    iSemanaCotizada.removeAttribute("disabled");
+    butQuitar.removeAttribute("disabled");
+  }
+
+  if (input.value <= trs.length && input.value >= 0) {
+    console.log(tr);
+    tr.remove();
+  }
+  else {
+    console.log("hola");
+  }
+
+}
