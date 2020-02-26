@@ -29,7 +29,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+          <h1 class="h3 mb-2 text-gray-800">Cotizaciones</h1>
           <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more
             information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
               DataTables documentation</a>.</p>
@@ -37,40 +37,49 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+              <button id="butAgregar" class="collapsible m-0 font-weight-bold text-primary" add="true">Agregar</button>
+              <button id="butEliminar" class="collapsible m-0 font-weight-bold text-primary" add="true">Eliminar</button>
+              
+              <div class="row m-1"></div>
+              <div id="content-input" class="content ml-3" style="display: none;">
+                <div class="row mb-2">
+                  <label for="iCotizacion">Cotizacion:</label>
+                  <input class="ml-2" type="number" value="1000000" name="iCotizacion" id="iCotizacion">
+                  <div class="text-warning col-4 ml-2" role="alert">
+                    Valor en millones de pesos*
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <label for="iMesAnio">Mes-Año:</label>
+                  <input class="ml-3" id="iMesAnio" name="iMesAnio" type="month" value="2020-01" min="1954-01"
+                    max="2020-01">
+                </div>
+                <div class="row"></div>
+
+              </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
+                      <th>Cotización</th>
+                      <th>Año</th>
+                      <th>Mes</th>
+                      <th>IPC</th>
+                      <th>Semana Cotizada</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
+                      <th>Cotización</th>
+                      <th>Año</th>
+                      <th>Mes</th>
+                      <th>IPC</th>
+                      <th>Semana Cotizada</th>
                     </tr>
                   </tfoot>
-                  <tbody>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
-                    </tr>
+                  <tbody id="table-content">
                   </tbody>
                 </table>
               </div>
@@ -141,6 +150,7 @@
   <!-- Page level custom scripts -->
   {{!-- <script src="js/demo/datatables-demo.js"></script> --}}
   {{>scriptsBootstrap}}
+  <script src="/scripts/addingInput.js"></script>
 </body>
 
 </html>
