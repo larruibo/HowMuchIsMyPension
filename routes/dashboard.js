@@ -13,12 +13,17 @@ router.get("/tables", function (req, res) {
 });
 
 router.get("/ipc", function (req, res) {
+  const data = [];
+  res.render("ipc", {
+    data
+  });
+});
+
+router.get("/ipcs", function (req, res) {
   console.log("llega");
   return mongo.ipcs.find({})
     .then(data => {
-      res.render("ipc", {
-        data
-      });
+      return res.json(data);
     });
 });
 
