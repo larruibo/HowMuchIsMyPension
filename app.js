@@ -4,7 +4,6 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const hbs = require("hbs");
-const mongo = require("./database/MongoUtils");
 
 // Routers
 var indexRouter = require("./routes/index");
@@ -18,7 +17,7 @@ const viewsPath = path.join(__dirname, "/templates/views");
 const partialsPath = path.join(__dirname, "/templates/partials");
 
 // Setup HBS engine and views locations
-app.set("view engine", "hbs");
+app.set("view engine", "ejs");
 app.set("views", viewsPath);
 hbs.registerPartials(partialsPath);
 

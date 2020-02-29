@@ -8,9 +8,10 @@
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
     "hbs": "^4.1.0",
-    "mongodb": "^3.5.3",
+    "mongodb": "^3.5.4",
     "morgan": "~1.9.1",
     "node-xlsx": "^0.15.0"
   },

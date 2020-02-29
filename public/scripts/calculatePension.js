@@ -18,7 +18,7 @@ const renderPage = (data) => {
     // tr elment
     let tr = document.createElement("tr");
     tbody.appendChild(tr);
-    
+
     // Iterating through the properties of every json
     for (let prop in element) {
       let td = document.createElement("td");
@@ -35,6 +35,10 @@ const renderPage = (data) => {
 };
 
 // Getting the data
-fetch("../files/pension.json")
-  .then(res => res.json())
-  .then(renderPage);
+// fetch("../files/pension.json")
+//   .then(res => res.json())
+//   .then(renderPage);
+
+console.log("fetch");
+fetch("/dashboard/ipc")
+  .then(req => console.log(req));

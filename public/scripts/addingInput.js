@@ -7,9 +7,10 @@ const divAgregar = document.getElementById("content-input-agregar");
 const divEliminar = document.getElementById("content-input-eliminar");
 
 
-butEnviar.addEventListener("click", () => {
-  addData();
-});
+// butEnviar.addEventListener("click", () => {
+//   addData();
+//   // setTimeout(()=> fetch("/dashboard/agregarCot"), 1000 );
+// });
 
 butQuitar.addEventListener("click", () => {
   let input = document.getElementById("iSemanaCotizada");
@@ -20,7 +21,6 @@ butEliminar.addEventListener("click", () => {
   butEliminar.classList.toggle("true");
 
   if (butEliminar.getAttribute("add") === "true") {
-    console.log("true");
     divEliminar.setAttribute("style", "display: block;");
     butEliminar.setAttribute("add", "false");
     butAgregar.setAttribute("disabled", "disabled");
@@ -36,7 +36,6 @@ butEliminar.addEventListener("click", () => {
     }
   }
   else {
-    console.log("false");
     divEliminar.setAttribute("style", "display: none;");
     butEliminar.setAttribute("add", "true");
     butAgregar.removeAttribute("disabled");
@@ -76,7 +75,6 @@ function addData() {
   ];
 
   //tds[0] = cotizacion
-  console.log();
   tds[0].textContent = parseInt(document.getElementById("iCotizacion").value);
 
   let anio_mes = document.getElementById("iMesAnio").value;
@@ -127,11 +125,6 @@ function eliminarData(input) {
   }
 
   if (input.value <= trs.length && input.value >= 0) {
-    console.log(tr);
     tr.remove();
   }
-  else {
-    console.log("hola");
-  }
-
 }

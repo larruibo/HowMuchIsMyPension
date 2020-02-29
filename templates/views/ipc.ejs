@@ -3,8 +3,8 @@
 
 <head>
 
-  {{>dashboardHeaders}}
-  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <%- include("../partials/dashboardHeaders.ejs") %>
+
 
 </head>
 
@@ -13,7 +13,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    {{>dashboardSidebar}}
+    <%- include("../partials/dashboardSidebar.ejs") %>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -22,7 +22,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        {{>dashboardTopbar}}
+        <%- include("../partials/dashboardTopbar.ejs") %>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
@@ -47,7 +47,7 @@
                       <th>Año</th>
                       <th>Mes</th>
                       <th>Indice</th>
-                      <th>Infrlación Anual</th>
+                      <th>Inflación Anual</th>
                       <th>Inflación Mensual</th>
                       <th>Inflación Año Corrido</th>
                     </tr>
@@ -63,6 +63,16 @@
                     </tr>
                   </tfoot>
                   <tbody id="content-table">
+                    <% data.forEach( (fila) => { %>
+                    <tr>
+                      <td> <%= fila.anio %></td>
+                      <td> <%= fila.mes %></td>
+                      <td> <%= fila.indice%></td>
+                      <td> <%= fila.inflacion_anual %></td>
+                      <td> <%= fila.inflacion_mensual %></td>
+                      <td> <%= fila.inflacion_anio_corrido %></td>
+                    </tr>
+                    <% }) %>
                   </tbody>
                 </table>
               </div>
@@ -116,23 +126,8 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  {{!-- <script src="vendor/jquery/jquery.min.js"></script> --}}
-  {{!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
-
-  <!-- Core plugin JavaScript-->
-  {{!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> --}}
-
-  <!-- Custom scripts for all pages-->
-  {{!-- <script src="js/sb-admin-2.min.js"></script> --}}
-
-  <!-- Page level plugins -->
-  {{!-- <script src="vendor/datatables/jquery.dataTables.min.js"></script> --}}
-  {{!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> --}}
-
   <!-- Page level custom scripts -->
-  {{!-- <script src="js/demo/datatables-demo.js"></script> --}}
-  {{>scriptsBootstrap}}
+  <%- include("../partials/scriptsBootstrap.ejs") %>
   <script src="/scripts/calculatePension.js"></script>
 </body>
 
