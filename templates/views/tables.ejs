@@ -3,8 +3,7 @@
 
 <head>
 
-  {{>dashboardHeaders}}
-  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <%- include("../partials/dashboardHeaders.ejs") %>
 
 </head>
 
@@ -13,7 +12,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    {{>dashboardSidebar}}
+    <%- include("../partials/dashboardSidebar.ejs") %>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -22,7 +21,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        {{>dashboardTopbar}}
+        <%- include("../partials/dashboardTopbar.ejs") %>
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
@@ -38,24 +37,30 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               <button id="butAgregar" class="collapsible m-0 font-weight-bold text-primary" add="true">Agregar</button>
-              <button id="butEliminar" class="collapsible m-0 font-weight-bold text-primary" add="true">Eliminar</button>
+              <button id="butEliminar" class="collapsible m-0 font-weight-bold text-primary"
+                add="true">Eliminar</button>
 
-              <div class="row m-1"></div>
-              <div id="content-input-agregar" class="content ml-3" style="display: none;">
-                <div class="row mb-2">
-                  <label for="iCotizacion">Cotizacion:</label>
-                  <input class="ml-2" type="number" value="1000000" name="iCotizacion" id="iCotizacion">
-                  <div class="text-warning col-4 ml-2" role="alert">
-                    Valor en millones de pesos*
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <label for="iMesAnio">Mes-Año:</label>
-                  <input class="ml-3" id="iMesAnio" name="iMesAnio" type="month" value="2020-01" min="1954-01"
-                    max="2020-01">
-                </div>
-              <button id="butEnviar" class="m-0 font-weight-bold text-primary">Enviar</button>
+              <div class="row m-1">
+
               </div>
+              <form action="/dashboard/tables/agregarCot" method="POST">
+                <div id="content-input-agregar" class="content ml-3" style="display: none;">
+                  <div class="form-group row mb-2">
+                    <label for="iCotizacion">Cotizacion:</label>
+                    <input class="ml-2" type="number" value="1000000" name="iCotizacion" id="iCotizacion">
+                    <div class="text-warning col-4 ml-2" role="alert">
+                      Valor en millones de pesos*
+                    </div>
+                  </div>
+                  <div class="form-group row mt-2">
+                    <label for="iMesAnio">Mes-Año:</label>
+                    <input class="ml-3" id="iMesAnio" name="iMesAnio" type="month" value="2020-01" min="1954-01"
+                      max="2020-01">
+                  </div>
+                  <button type="submit" id="butEnviar"
+                    class="form-group m-0 font-weight-bold text-primary">Enviar</button>
+                </div>
+              </form>
               <div id="content-input-eliminar" style="display: none;">
                 <div class="row mb-2">
                   <label for="iSemanaCotizada">Seleccione la semana cotizada:</label>
@@ -139,23 +144,8 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  {{!-- <script src="vendor/jquery/jquery.min.js"></script> --}}
-  {{!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
+  <%- include("../partials/scriptsBootstrap.ejs") %>
 
-  <!-- Core plugin JavaScript-->
-  {{!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> --}}
-
-  <!-- Custom scripts for all pages-->
-  {{!-- <script src="js/sb-admin-2.min.js"></script> --}}
-
-  <!-- Page level plugins -->
-  {{!-- <script src="vendor/datatables/jquery.dataTables.min.js"></script> --}}
-  {{!-- <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> --}}
-
-  <!-- Page level custom scripts -->
-  {{!-- <script src="js/demo/datatables-demo.js"></script> --}}
-  {{>scriptsBootstrap}}
   <script src="/scripts/addingInput.js"></script>
 </body>
 

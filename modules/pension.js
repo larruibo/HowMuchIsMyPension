@@ -1,45 +1,43 @@
-const fs = require('fs');
-const excel = require('node-xlsx');
-var path = require('path');
+const fs = require("fs");
+const excel = require("node-xlsx");
+const path = require("path");
+
 
 const pension = () => {
   // Direccion de la carpeta
-  const dir = path.join(__dirname, '../public/files/ipc-mensual-1954.xlsx');
+  const dir = path.join(__dirname, "../public/files/csv-pension.csv");
   // Archivo que contiene la infrmacion
-  const ipc_file = excel.parse(fs.readFileSync(dir));
-  // Headers de la data
-  const headers = [];
-  // Data que contiene los ipcs
-  const data = [];
-  
-  // Esta myPension es usada para acceder a metodos
   const myPension = {};
-  // Adding headers the columns of the data
-  const load_data = () => {
-    ipc_file[0].data[12].forEach((element) => {
-      headers.push(element);
-    });
-    // Data of IPC montly since 1956
-    ipc_file[0].data.forEach((element, index) => {
-      if (index >= 13 && index <= 781) {
-        // const ipcs = [element[1], element[2], element[3], element[4]];
-        data.push(element);
+  const fileCSV = fs.readFileSync(dir, {encoding: "utf-8"});
+  const ipcJson = () => {
+    var lines = fileCSV.split("\n");
+
+    var result = [];
+
+    var headers = lines[0].split(",");
+
+    for (var i = 1; i < lines.length; i++) {
+
+      var obj = {};
+      var currentline = lines[i].split(",");
+
+      for (var j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j];
       }
-    });
+
+      result.push(obj);
+    }
+
+    //return result; //JavaScript object
+    return JSON.stringify(result); //JSON
   };
-  
-
-  myPension.data = () => data;
-
-  myPension.headers = () => headers;
 
   myPension.path_file = () => dir;
 
-  myPension.ipc_file = () => ipc_file;
+  myPension.fileJson = () => ipcJson();
 
-  myPension.load_data = load_data;
+  myPension.fileCSV = () => fileCSV;
 
   return myPension;
 };
-
 module.exports = pension;
