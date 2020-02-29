@@ -5,10 +5,10 @@ function MongoUtils() {
 
   let hostname = "hostname",
     port = 27017,
-    colluser= "users";
-  let username = "allan9899",
+    username = "allan9899",
     password = "hola1234",
     dbName = "PensionDB";
+
 
   mu.dbName = (name) => arguments.length !== 0 ? ((mu.dbName = name), mu) : dbName;
   mu.port = (port) => arguments.length !== 0 ? ((mu.port = port), mu) : port;
@@ -33,7 +33,25 @@ function MongoUtils() {
           .toArray()
           .finally(() => client.close());
       });
+ 
   };
+  mu.insert = (client, query) => {
+    const cot = client.db(dbName).collection("cotizaciones");
+    return cot.insertOne(query).toArray(); 
+  };
+
+  mu.users= {};
+  mu.users.find =(client,query)=>{
+    const usuarios= client.db(dbName).collection("usuarios");
+    return usuarios.find(query).finally(()=> client.close());
+  };
+
+  mu.users.insert =(client,query)=>{
+    const usuarios= client.db(dbName).collection("usuarios");
+    return usuarios.insertOne(query).finally(()=> client.close());
+  };
+
   return mu;
 }
+  
 module.exports = MongoUtils();
