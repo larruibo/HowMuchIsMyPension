@@ -8,6 +8,7 @@ var session = require("express-session");
 var passport= require("passport");
 var mongo = require("./database/MongoUtils.js");
 
+const LocalStrategy = require("passport-local").Strategy;
 
 // Routers
 var indexRouter = require("./routes/index");
@@ -23,7 +24,6 @@ const partialsPath = path.join(__dirname, "/templates/partials");
 // Setup HBS engine and views locations
 app.set("view engine", "ejs");
 
-app.set("view engine", "hbs");
 app.set("views", viewsPath);
 hbs.registerPartials(partialsPath);
 
@@ -48,15 +48,6 @@ app.use(session({
 app.use("/", indexRouter);
 // Ruta de dashboard
 app.use("/dashboard", dashboardRouter);
-
-app.post("/login", 
-  passport.authenticate("local", { failureRedirect: "/login" }),
-  function(req, res) {
-    res.redirect("/dashboard");
-  });
-
-
-const LocalStrategy = require("passport-local").Strategy;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
