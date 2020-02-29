@@ -18,6 +18,9 @@ const renderPage = (data) => {
         td.textContent = `${element[prop]}`;
       }
     }
+
+    const spinner = document.getElementById("spinner");
+    spinner.setAttribute("style", "display: none;");
     
   });
 };

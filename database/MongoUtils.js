@@ -3,9 +3,7 @@ const MongoClient = require("mongodb").MongoClient;
 function MongoUtils() {
   const mu = {};
 
-  let hostname = "hostname",
-    port = 27017,
-    username = "allan9899",
+  let username = "allan9899",
     password = "hola1234",
     dbName = "PensionDB";
 
@@ -36,16 +34,37 @@ function MongoUtils() {
   };
   mu.cotizaciones = {};
 
+  //Get All Cotizaciones 
+  mu.cotizaciones.find = query => {
+    return mu.connect()
+      .then((client) => {
+        console.log("getting Cotizaciones");
+        const cotizaciones = client.db(dbName).collection("cotizaciones");
+        console.log("Querrying", query);
+        return cotizaciones.find(query)
+          .toArray()
+          .finally(() => client.close());
+      });
+  };
+
   mu.cotizaciones.insert = (query) => {
     return mu.connect()
       .then(client => {
         const cotizaciones = client.db(dbName).collection("cotizaciones");
         return cotizaciones.insertOne(query)
-          .then(find({}))
           .finally(() => client.close());
       });
   };
-  
+
+  mu.cotizaciones.delete = (query) => {
+    return mu.connect()
+      .then(client => {
+        const cotizaciones = client.db(dbName).collection("cotizaciones");
+        return cotizaciones.deleteOne(query)
+          .finally(() => client.close());
+      });
+  };
+
   mu.insert = (client, query) => {
     const cot = client.db(dbName).collection("cotizaciones");
     return cot.insertOne(query).toArray();
@@ -59,7 +78,8 @@ function MongoUtils() {
 
   mu.users.insert = (client, query) => {
     const usuarios = client.db(dbName).collection("usuarios");
-    return usuarios.insertOne(query).finally(() => client.close());
+    return usuarios.insertOne(query)
+      .finally(() => client.close());
   };
 
   return mu;

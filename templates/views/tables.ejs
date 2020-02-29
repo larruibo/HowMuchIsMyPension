@@ -62,59 +62,73 @@
                 </div>
               </form>
               <div id="content-input-eliminar" style="display: none;">
-                <div class="row mb-2">
-                  <label for="iSemanaCotizada">Seleccione la semana cotizada:</label>
-                  <input class="ml-2 col-2" type="number" value="1" name="iSemanaCotizada" id="iSemanaCotizada">
-                  <button id="butQuitar" class="m-0 font-weight-bold text-primary">Quitar</button>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Cotización</th>
-                      <th>Año</th>
-                      <th>Mes</th>
-                      <th>IPC</th>
-                      <th>Semana Cotizada</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Cotización</th>
-                      <th>Año</th>
-                      <th>Mes</th>
-                      <th>IPC</th>
-                      <th>Semana Cotizada</th>
-                    </tr>
-                  </tfoot>
-                  <tbody id="table-content">
-                  </tbody>
-                </table>
+                <form action="/dashboard/tables/eliminarCot" method="POST">
+                  <div class="row mb-2">
+                    <div class="form-group row mt-2">
+                      <label for="mes_anio_delete">Mes-Año:</label>
+                      <input class="ml-3" id="mes_anio_delete" name="anio_mes" type="month" value="2020-01"
+                        min="1954-01" max="2020-01">
+                    </div>
+                    <button id="butQuitar" type="submit" class="form-group m-0 font-weight-bold text-primary">Quitar</button>
+                </form>
               </div>
             </div>
           </div>
-
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Cotización</th>
+                    <th>Año</th>
+                    <th>Mes</th>
+                    <th>IPC</th>
+                    <th>Semana Cotizada</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Cotización</th>
+                    <th>Año</th>
+                    <th>Mes</th>
+                    <th>IPC</th>
+                    <th>Semana Cotizada</th>
+                  </tr>
+                </tfoot>
+                <tbody id="table-content">
+                  <% cotizaciones.forEach( (fila) => { %>
+                  <tr>
+                    <td> <%= fila.cotizacion %></td>
+                    <td> <%= fila.anio %></td>
+                    <td> <%= fila.mes%></td>
+                    <td> <%= fila.ipc %></td>
+                    <td> <%= fila.semana_cotizada %></td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <!-- /.container-fluid -->
 
       </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+      <!-- /.container-fluid -->
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; Your Website 2019</span>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
+
+  </div>
+  <!-- End of Content Wrapper -->
 
   </div>
   <!-- End of Page Wrapper -->

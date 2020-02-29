@@ -7,10 +7,10 @@ const divAgregar = document.getElementById("content-input-agregar");
 const divEliminar = document.getElementById("content-input-eliminar");
 
 
-// butEnviar.addEventListener("click", () => {
-//   addData();
-//   // setTimeout(()=> fetch("/dashboard/agregarCot"), 1000 );
-// });
+butEnviar.addEventListener("click", () => {
+  // addData();
+  // setTimeout(()=> fetch("/dashboard/agregarCot"), 1000 );
+});
 
 butQuitar.addEventListener("click", () => {
   let input = document.getElementById("iSemanaCotizada");
@@ -25,13 +25,13 @@ butEliminar.addEventListener("click", () => {
     butEliminar.setAttribute("add", "false");
     butAgregar.setAttribute("disabled", "disabled");
     let trs = document.querySelectorAll("tbody > tr");
-    let iSemanaCotizada = document.getElementById("iSemanaCotizada");
+    let anio_mes = document.getElementById("mes_anio_delete");
     if (trs.length === 0) {
-      iSemanaCotizada.setAttribute("disabled", "disabled");
+      anio_mes.setAttribute("disabled", "disabled");
       butQuitar.setAttribute("disabled", "disabled");
     }
     else {
-      iSemanaCotizada.removeAttribute("disabled");
+      anio_mes.removeAttribute("disabled");
       butQuitar.removeAttribute("disabled");
     }
   }
