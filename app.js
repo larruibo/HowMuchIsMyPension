@@ -7,6 +7,7 @@ const hbs = require("hbs");
 var session = require("express-session");
 var passport = require("passport");
 var mongo = require("./database/MongoUtils.js");
+var bodyParser = require("body-parser");
 
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -21,7 +22,7 @@ const publicPath = path.join(__dirname, "public");
 const viewsPath = path.join(__dirname, "/templates/views");
 const partialsPath = path.join(__dirname, "/templates/partials");
 
-// Setup HBS engine and views locations
+// Setup HBS engine and views locationscomm
 app.set("view engine", "ejs");
 app.set("views", viewsPath);
 hbs.registerPartials(partialsPath);
@@ -34,13 +35,9 @@ app.use(express.static(publicPath));
 
 //confugura passport
 app.use(passport.initialize());
+app.use(session({ secret: "cats" }));
 app.use(passport.session());
-
-app.use(session({
-  secret: "secret",
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 // Ruta de index
@@ -60,9 +57,11 @@ app.get("*", (req, res) => {
 
 
 passport.use(new LocalStrategy(
+  {usernameField: "user",
+    passwordField: "password"},
   function (username, password, done) {
     mongo.findOne({
-      username: username
+      user: username
     }, function (err, user) {
       if (err) {
         return done(err);
