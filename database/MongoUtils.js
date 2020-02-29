@@ -43,7 +43,7 @@ function MongoUtils() {
   mu.users= {};
   mu.users.findOne =(client,query)=>{
     const usuarios= client.db(dbName).collection("usuarios");
-    return usuarios.find(query).finally(()=> client.close());
+    return usuarios.findOne(query).finally(()=> client.close());
   };
 
   mu.users.insert =(client,query)=>{
