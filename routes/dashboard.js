@@ -27,4 +27,15 @@ router.get("/ipcs", function (req, res) {
     });
 });
 
+router.get("/tables/agregarCot", function (req, res) {
+  console.log(req.query);
+  return mongo.cotizaciones.find({})
+    .then(cotizaciones => {
+      return res.render("tables", {
+        cotizaciones
+      });
+    });
+  
+});
+
 module.exports = router;

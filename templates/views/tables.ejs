@@ -43,7 +43,7 @@
               <div class="row m-1">
 
               </div>
-              <form action="/dashboard/tables/agregarCot" method="POST">
+              <form action="/dashboard/tables/agregarCot" method="GET">
                 <div id="content-input-agregar" class="content ml-3" style="display: none;">
                   <div class="form-group row mb-2">
                     <label for="iCotizacion">Cotizacion:</label>
@@ -91,6 +91,16 @@
                     </tr>
                   </tfoot>
                   <tbody id="table-content">
+                    <% cotizaciones.forEach( (fila) => { %>
+                    <tr>
+                      <td> <%= fila.anio %></td>
+                      <td> <%= fila.mes %></td>
+                      <td> <%= fila.indice%></td>
+                      <td> <%= fila.inflacion_anual %></td>
+                      <td> <%= fila.inflacion_mensual %></td>
+                      <td> <%= fila.inflacion_anio_corrido %></td>
+                    </tr>
+                    <% }) %>
                   </tbody>
                 </table>
               </div>
