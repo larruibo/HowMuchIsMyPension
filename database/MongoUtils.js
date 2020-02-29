@@ -56,14 +56,14 @@ function MongoUtils() {
       });
   };
 
-  // mu.cotizaciones.delete = (query) => {
-  //   return mu.connect()
-  //     .then(client => {
-  //       const cotizaciones = client.db(dbName).collection("cotizaciones");
-  //       return cotizaciones.deleteOne(query)
-  //         .finally(() => client.close());
-  //     });
-  // };
+  mu.cotizaciones.delete = (query) => {
+    return mu.connect()
+      .then(client => {
+        const cotizaciones = client.db(dbName).collection("cotizaciones");
+        return cotizaciones.deleteOne(query)
+          .finally(() => client.close());
+      });
+  };
 
   mu.insert = (client, query) => {
     const cot = client.db(dbName).collection("cotizaciones");

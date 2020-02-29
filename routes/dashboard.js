@@ -49,18 +49,18 @@ router.post("/tables/agregarCot", function (req, res) {
         ipc: parseFloat(cotizacion[0].indice),
         semana_cotizada: numeroCot + 1
       };
-      return mongo.cotizaciones.insert(obj);
-    }).finally(res.redirect("/dashboard/tables"));
+      mongo.cotizaciones.insert(obj).finally(res.redirect("/dashboard/tables"));
+    });
 
 });
 
 router.post("/tables/eliminarCot", function (req, res) {
   console.log("parameters", req.body);
-  console.log(req.body.semana_cotizada);
+  console.log(req.body.anio_mes);
+  const anioMes = req.body.anio_mes.split("-");
   // Query para obtener el ipc y la semana cotizada
-  // mongo.ipcs.delete({ semana_cotizada: req.body.semana_cotizada })
-  // .finally(res.redirect("/dashboard/tables"));
-
+  mongo.cotizaciones.delete({ anio: anioMes[0], mes: anioMes[1] })
+    .finally(res.redirect("/dashboard/tables"));
 });
 
 module.exports = router;
