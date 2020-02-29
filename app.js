@@ -6,7 +6,7 @@ var logger = require("morgan");
 const hbs = require("hbs");
 var session = require("express-session");
 var passport= require("passport");
-
+var mongo = require("..database/MongoUtils.js");
 
 
 // Routers
@@ -47,7 +47,7 @@ app.use(session({
 // eslint-disable-next-line no-undef
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
+    mongo.findOne({ username: username }, function (err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       if (!user.verifyPassword(password)) { return done(null, false); }
@@ -72,7 +72,7 @@ const LocalStrategy = require("passport-local").Strategy;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    UserDetails.findOne({
+    mongo.findOne({
       username: username
     }, function(err, user) {
       if (err) {
