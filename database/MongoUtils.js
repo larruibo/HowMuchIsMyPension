@@ -1,12 +1,11 @@
 const MongoClient = require("mongodb").MongoClient;
-
+require("dotenv").config();
 function MongoUtils() {
   const mu = {};
 
-  let username = "allan9899",
-    password = "hola1234",
-    dbName = "PensionDB";
-
+  let username = process.env.DB_USERNAME,
+    password = process.env.DB_PASSWORD,
+    dbName = process.env.DB_NAME;
 
   mu.dbName = (name) => arguments.length !== 0 ? ((mu.dbName = name), mu) : dbName;
   mu.port = (port) => arguments.length !== 0 ? ((mu.port = port), mu) : port;
