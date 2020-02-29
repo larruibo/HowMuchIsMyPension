@@ -38,10 +38,10 @@ function MongoUtils() {
   mu.cotizaciones.find = query => {
     return mu.connect()
       .then((client) => {
-        console.log("getting client details");
-        const ipcs = client.db(dbName).collection("cotizaciones");
+        console.log("getting Cotizaciones");
+        const cotizaciones = client.db(dbName).collection("cotizaciones");
         console.log("Querrying", query);
-        return ipcs.find(query)
+        return cotizaciones.find(query)
           .toArray()
           .finally(() => client.close());
       });
@@ -52,10 +52,18 @@ function MongoUtils() {
       .then(client => {
         const cotizaciones = client.db(dbName).collection("cotizaciones");
         return cotizaciones.insertOne(query)
-          .toArray()
           .finally(() => client.close());
       });
   };
+
+  // mu.cotizaciones.delete = (query) => {
+  //   return mu.connect()
+  //     .then(client => {
+  //       const cotizaciones = client.db(dbName).collection("cotizaciones");
+  //       return cotizaciones.deleteOne(query)
+  //         .finally(() => client.close());
+  //     });
+  // };
 
   mu.insert = (client, query) => {
     const cot = client.db(dbName).collection("cotizaciones");
