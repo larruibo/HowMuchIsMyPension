@@ -17,20 +17,30 @@ function MongoUtils() {
     const client = new MongoClient(url, options);
     return client.connect();
   };
-  
+
   mu.ipcs = {};
 
   mu.ipcs.find = query => {
     return mu.connect()
       .then((client) => {
         console.log("getting client details");
-        const pensiones = client.db(dbName).collection("ipcs");
+        const ipcs = client.db(dbName).collection("ipcs");
         console.log("Querrying", query);
-        return pensiones.find(query)
+        return ipcs.find(query)
           .toArray()
           .finally(() => client.close());
       });
-
+  };
+  mu.cotizaciones = {};
+  
+  mu.cotizaciones.insert = (query) => {
+    return mu.connect()
+      .then(client => {
+        const cotizaciones = client.db(dbName).collection("cotizaciones");
+        return cotizaciones.insertOne(query)
+          .then(find({}))
+          .finally(() => client.close());
+      });
   };
 
   mu.insert = (client, query) => {

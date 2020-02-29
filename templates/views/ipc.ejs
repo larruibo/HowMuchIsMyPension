@@ -63,7 +63,10 @@
                     </tr>
                   </tfoot>
                   <tbody id="content-table">
-                    <% data.forEach( (fila) => { %>
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                    <!-- <% data.forEach( (fila) => { %>
                     <tr>
                       <td> <%= fila.anio %></td>
                       <td> <%= fila.mes %></td>
@@ -72,7 +75,7 @@
                       <td> <%= fila.inflacion_mensual %></td>
                       <td> <%= fila.inflacion_anio_corrido %></td>
                     </tr>
-                    <% }) %>
+                    <% }) %> -->
                   </tbody>
                 </table>
               </div>
