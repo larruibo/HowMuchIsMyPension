@@ -3,9 +3,12 @@ const MongoClient = require("mongodb").MongoClient;
 function MongoUtils() {
   const mu = {};
 
-  let username = "allan9899",
+  let hostname = "hostname",
+    port = 27017,
+    username = "allan9899",
     password = "hola1234",
     dbName = "PensionDB";
+
 
   mu.dbName = (name) => arguments.length !== 0 ? ((mu.dbName = name), mu) : dbName;
   mu.port = (port) => arguments.length !== 0 ? ((mu.port = port), mu) : port;
@@ -32,7 +35,7 @@ function MongoUtils() {
       });
   };
   mu.cotizaciones = {};
-  
+
   mu.cotizaciones.insert = (query) => {
     return mu.connect()
       .then(client => {
@@ -42,12 +45,24 @@ function MongoUtils() {
           .finally(() => client.close());
       });
   };
-
+  
   mu.insert = (client, query) => {
     const cot = client.db(dbName).collection("cotizaciones");
     return cot.insertOne(query).toArray();
   };
 
+  mu.users = {};
+  mu.users.findOne = (client, query) => {
+    const usuarios = client.db(dbName).collection("usuarios");
+    return usuarios.find(query).finally(() => client.close());
+  };
+
+  mu.users.insert = (client, query) => {
+    const usuarios = client.db(dbName).collection("usuarios");
+    return usuarios.insertOne(query).finally(() => client.close());
+  };
+
   return mu;
 }
+
 module.exports = MongoUtils();
