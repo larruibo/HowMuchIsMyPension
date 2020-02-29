@@ -22,8 +22,6 @@ const partialsPath = path.join(__dirname, "/templates/partials");
 
 // Setup HBS engine and views locations
 app.set("view engine", "ejs");
-
-app.set("view engine", "hbs");
 app.set("views", viewsPath);
 hbs.registerPartials(partialsPath);
 
