@@ -8,32 +8,6 @@ router.get("/", function (req, res) {
   res.render("dashboard");
 });
 
-router.get("/tables", function (req, res) {
-  mongo.cotizaciones.find({})
-    .then(cotizaciones => {
-      numeroCot = cotizaciones.length;
-      console.log(cotizaciones);
-      return res.render("tables", {
-        cotizaciones
-      });
-    });
-});
-
-router.get("/ipc", function (req, res) {
-  const data = [];
-  res.render("ipc", {
-    data
-  });
-});
-
-router.get("/ipcs", function (req, res) {
-  console.log("llega");
-  return mongo.ipcs.find({})
-    .then(data => {
-      return res.json(data);
-    });
-});
-
 router.post("/tables/agregarCot", function (req, res) {
   console.log("parameters", req.body);
   let anioMes = req.body.iMesAnio;
@@ -62,5 +36,33 @@ router.post("/tables/eliminarCot", function (req, res) {
   mongo.cotizaciones.delete({ anio: anioMes[0], mes: anioMes[1] })
     .finally(res.redirect("/dashboard/tables"));
 });
+
+router.get("/tables", function (req, res) {
+  mongo.cotizaciones.find({})
+    .then(cotizaciones => {
+      numeroCot = cotizaciones.length;
+      console.log(cotizaciones);
+      return res.render("tables", {
+        cotizaciones
+      });
+    });
+});
+
+router.get("/ipc", function (req, res) {
+  const data = [];
+  res.render("ipc", {
+    data
+  });
+});
+
+router.get("/ipcs", function (req, res) {
+  console.log("llega");
+  return mongo.ipcs.find({})
+    .then(data => {
+      return res.json(data);
+    });
+});
+
+
 
 module.exports = router;

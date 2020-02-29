@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const hbs = require("hbs");
 var session = require("express-session");
-var passport= require("passport");
+var passport = require("passport");
 var mongo = require("./database/MongoUtils.js");
 
 
@@ -47,20 +47,23 @@ app.use("/", indexRouter);
 // Ruta de dashboard
 app.use("/dashboard", dashboardRouter);
 
-app.post("/login", 
+app.post("/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
-  function(req, res) {
+  function (req, res) {
     res.redirect("/dashboard");
   });
 
+app.get("*", (req, res) => {
+  res.render("not_found_404");
+});
 
 const LocalStrategy = require("passport-local").Strategy;
 
 passport.use(new LocalStrategy(
-  function(username, password, done) {
+  function (username, password, done) {
     mongo.findOne({
       username: username
-    }, function(err, user) {
+    }, function (err, user) {
       if (err) {
         return done(err);
       }
