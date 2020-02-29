@@ -3,6 +3,9 @@ const MongoClient = require("mongodb").MongoClient;
 function MongoUtils() {
   const mu = {};
 
+  let hostname = "hostname",
+    port = 27017,
+    colluser= "users";
   let username = "allan9899",
     password = "hola1234",
     dbName = "PensionDB";
@@ -30,14 +33,7 @@ function MongoUtils() {
           .toArray()
           .finally(() => client.close());
       });
-
   };
-
-  mu.insert = (client, query) => {
-    const cot = client.db(dbName).collection("cotizaciones");
-    return cot.insertOne(query).toArray();
-  };
-
   return mu;
 }
 module.exports = MongoUtils();
