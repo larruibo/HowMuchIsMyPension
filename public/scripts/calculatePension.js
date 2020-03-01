@@ -25,11 +25,7 @@ const renderPage = (data) => {
   });
 };
 
-// Getting the data
-// fetch("../files/pension.json")
-//   .then(res => res.json())
-//   .then(renderPage);
-
+// Recibe peticion de dashboard/ipcs
 fetch("/dashboard/ipcs")
   .then(res => res.json())
   .then(renderPage);

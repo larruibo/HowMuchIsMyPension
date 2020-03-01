@@ -1,13 +1,16 @@
 const MongoClient = require("mongodb").MongoClient;
 require("dotenv").config();
+
+// Modulo utilizado para la base de datos
 function MongoUtils() {
   const mu = {};
 
+  // Variables
   let username = process.env.DB_USERNAME,
     password = process.env.DB_PASSWORD,
     dbName = process.env.DB_NAME,
     url = `mongodb+srv://${username}:${password}@pensiondb-y5joy.mongodb.net/test?retryWrites=true&w=majority`;
-
+  // Getters
   mu.dbName = (name) => arguments.length !== 0 ? ((mu.dbName = name), mu) : dbName;
   mu.port = (port) => arguments.length !== 0 ? ((mu.port = port), mu) : port;
   mu.hostname = (hostname) => arguments.length !== 0 ? ((mu.hostname = hostname), mu) : hostname;
@@ -32,9 +35,10 @@ function MongoUtils() {
           .finally(() => client.close());
       });
   };
+
   mu.cotizaciones = {};
 
-  //Get All Cotizaciones 
+  //Da cotizaciones de un usuario 
   mu.cotizaciones.find = query => {
     return mu.connect()
       .then((client) => {
@@ -47,6 +51,7 @@ function MongoUtils() {
       });
   };
 
+  // inserta cotizaciones de un usuario
   mu.cotizaciones.insert = (query) => {
     return mu.connect()
       .then(client => {
@@ -56,6 +61,7 @@ function MongoUtils() {
       });
   };
 
+  // Elimina cotizaciones de un usuario
   mu.cotizaciones.delete = (query) => {
     return mu.connect()
       .then(client => {
@@ -74,6 +80,7 @@ function MongoUtils() {
   mu.users = {};
   mu.passport = {};
 
+  // Encuentra un usuario para la sesion
   mu.passport.findOne = (query) => {
     return mu.connect()
       .then(client => {
@@ -82,6 +89,7 @@ function MongoUtils() {
       });
   };
 
+  // Encuentra un usuario para la sesion
   mu.passport.findById = (query, cb) => {
     mu.connect()
       .then(client => {
@@ -93,6 +101,7 @@ function MongoUtils() {
       });
   };
 
+  // Inserta un nuevo usuario que se registro
   mu.passport.insert = (query) => {
     return mu.connect()
       .then(client => {
@@ -101,6 +110,7 @@ function MongoUtils() {
       });
   };
 
+  // Inserta un nuevo usuario a la base de datos
   mu.users.insert = (client, query) => {
     const usuarios = client.db(dbName).collection("usuarios");
     return usuarios.insertOne(query)
