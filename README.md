@@ -21,10 +21,13 @@ If running locally, install MongoDB. To install it just go to: <a href="https://
 ## Usage
 <h2> Link </h2>
 <a> https://how-much-is-my-pension.herokuapp.com/</a>
+<br>
 ## Authors
 [Allan Roy Corinaldi Castaño](https://github.com/ar-corinaldi)
 
 [Daniella Arteaga Mendoza](https://github.com/dartm05)
+
+<br>
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
