@@ -81,7 +81,7 @@
                         Cotizadas</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div id="value-progress-bar" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%= 100*cotizaciones.length/1250 %></div>
+                          <div id="value-progress-bar" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%= (100*cotizaciones.length/1300).toFixed(2) %></div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -107,7 +107,7 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Cotizaciones Restantes
                       </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= 1250-cotizaciones.length %></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= 1300-cotizaciones.length %></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>

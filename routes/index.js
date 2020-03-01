@@ -43,7 +43,7 @@ router.use(session({
   resave: false,
   saveUninitialized: true,
   secret: process.env.SECRET,
-  cookie: { expires : new Date(Date.now() + 3600000) }
+  cookie: { expires : new Date(Date.now() + 900000) }
 }));
 
 //Passport config

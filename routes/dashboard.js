@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const mongo = require("../database/MongoUtils");
-var numeroCot = 0;
+const pension = require("../modules/pension");
+require("dotenv").config();
 
 /* GET users listing. */
 router.get("/", function (req, res) {
@@ -11,9 +12,17 @@ router.get("/", function (req, res) {
     res.redirect("/login");
   }
   else {
-    mongo.cotizaciones.find()
+    
+    mongo.cotizaciones.find({username: user.username})
       .then(cotizaciones => {
-        res.render("dashboard", { user, cotizaciones });
+        console.log("Cotizacionesss", cotizaciones[0]);
+        console.log(typeof(cotizaciones[0]));
+        let val = 0;
+        if(cotizaciones){
+          val = pension.pension(cotizaciones);
+        }
+        console.log(val);
+        res.render("dashboard", { user, cotizaciones, pension: val });
       });
   }
 });
@@ -54,9 +63,9 @@ router.get("/tables", function (req, res) {
     res.redirect("/login");
   }
   else {
+    console.log(user.username);
     mongo.cotizaciones.find({ username: user.username })
       .then(cotizaciones => {
-        numeroCot = cotizaciones.length;
         return res.render("tables", {
           cotizaciones,
           user
@@ -79,7 +88,5 @@ router.get("/ipcs", function (req, res) {
       return res.json(data);
     });
 });
-
-
 
 module.exports = router;
