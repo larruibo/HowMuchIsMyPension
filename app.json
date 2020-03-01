@@ -1,0 +1,12 @@
+{
+    "name": "How much is my pension",
+    "description": "This app allows to calculate your 401k pension",
+    "keywords": [
+      "productivity",
+      "HTML5",
+      "pension"
+    ],
+
+    "repository": "https://github.com/ar-corinaldi/HowMuchIsMyPension",
+    "success_url": "/"
+    }
