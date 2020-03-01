@@ -17,18 +17,21 @@ const crypto = require("crypto");
 
 /* GET home page. */
 router.get("/", function (req, res) {
-  res.render("index", { title: "Express" });
+  res.render("index");
 });
 
+// GET login page
 router.get("/login", function (req, res) {
-  res.render("login", { title: "Express" });
+  res.render("login");
 });
 
+// GET logout page
 router.get("/logout", function (req, res) {
-  req.logout();
+  res.clearCookie("connect.sid");
   res.redirect("/");
 });
 
+// GET register page
 router.get("/register", function (req, res) {
   res.render("register");
 });
@@ -39,7 +42,8 @@ router.use(session({
   store: new MongoStore({ url: mongo.url, collection: "sessions" }),
   resave: false,
   saveUninitialized: true,
-  secret: process.env.SECRET
+  secret: process.env.SECRET,
+  cookie: { expires : new Date(Date.now() + 3600000) }
 }));
 
 //Passport config
@@ -48,6 +52,7 @@ function validPassword(password, hash, salt) {
   return hash === hashVerify;
 }
 
+// Password generator for registered users
 function genPassword(password) {
   var salt = crypto.randomBytes(32).toString("hex");
   var genHash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
@@ -58,6 +63,7 @@ function genPassword(password) {
   };
 }
 
+// Local Strategy
 passport.use(new LocalStrategy(
   function (username, password, cb) {
     // User es User.findOne
@@ -96,7 +102,10 @@ passport.deserializeUser(function (username, cb) {
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.post("/login", passport.authenticate("local",
-  { failureRedirect: "/login", successRedirect: "/dashboard" }));
+// POST login page
+router.post("/login", passport.authenticate("local", { 
+  failureRedirect: "/login", 
+  successRedirect: "/dashboard",
+}));
 
 module.exports = router;
