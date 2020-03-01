@@ -37,7 +37,7 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-
+console.log(mongo.url);
 // Session config
 router.use(session({
   store: new MongoStore({ url: mongo.url, collection: "sessions" }),
