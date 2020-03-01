@@ -69,7 +69,6 @@ passport.use(new LocalStrategy(
         const isValid = validPassword(password, user.hash, user.salt);
 
         if (isValid) {
-          console.log("Antes del cb");
           return cb(null, user);
         } else {
           return cb(null, false);

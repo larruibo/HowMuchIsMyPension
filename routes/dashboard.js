@@ -5,8 +5,9 @@ var numeroCot = 0;
 
 /* GET users listing. */
 router.get("/", function (req, res) {
-  console.log(req.body);
-  res.render("dashboard");
+  console.log(req.user);
+  const user = req.user;
+  res.render("dashboard", {user});
 });
 
 router.post("/tables/agregarCot", function (req, res) {
@@ -22,7 +23,8 @@ router.post("/tables/agregarCot", function (req, res) {
         anio: anioMes[0],
         mes: anioMes[1],
         ipc: parseFloat(cotizacion[0].indice),
-        semana_cotizada: numeroCot + 1
+        semana_cotizada: numeroCot + 1,
+        username: req.user.username
       };
       mongo.cotizaciones.insert(obj).finally(res.redirect("/dashboard/tables"));
     });
@@ -39,12 +41,14 @@ router.post("/tables/eliminarCot", function (req, res) {
 });
 
 router.get("/tables", function (req, res) {
-  mongo.cotizaciones.find({})
+  console.log(req.user);
+  const user = req.user;
+  mongo.cotizaciones.find({username: user.username})
     .then(cotizaciones => {
       numeroCot = cotizaciones.length;
-      console.log(cotizaciones);
       return res.render("tables", {
-        cotizaciones
+        cotizaciones,
+        user
       });
     });
 });
@@ -52,7 +56,7 @@ router.get("/tables", function (req, res) {
 router.get("/ipc", function (req, res) {
   const data = [];
   res.render("ipc", {
-    data
+    data,
   });
 });
 
@@ -60,6 +64,7 @@ router.get("/ipcs", function (req, res) {
   console.log("llega");
   return mongo.ipcs.find({})
     .then(data => {
+
       return res.json(data);
     });
 });

@@ -85,11 +85,8 @@ function MongoUtils() {
     mu.connect()
       .then(client => {
         const usuarios = client.db(dbName).collection("usuarios");
-        console.log(query);
         usuarios.findOne({username: query})
           .then( (usuario, err) => {
-            console.log(err);
-            console.log(usuario);
             cb(err, usuario);
           });
       });
