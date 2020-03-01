@@ -3,13 +3,13 @@ const MongoClient = require("mongodb").MongoClient;
 // Modulo utilizado para la base de datos
 function MongoUtils() {
   const mu = {};
-  let DB_USERNAME= process.env.DB_USERNAME,
-    DB_PASSWORD=process.env.DB_PASSWORD,
-    DB_NAME=process.env.PensionDB;
+  let DB_USERNAME = process.env.DB_USERNAME,
+    DB_PASSWORD = process.env.DB_PASSWORD,
+    DB_NAME = process.env.DB_NAME;
 
-    console.log(DB_USERNAME);
-    console.log(DB_PASSWORD);
-    console.log(DB_NAME);
+  console.log(DB_USERNAME);
+  console.log(DB_PASSWORD);
+  console.log(DB_NAME);
   // Variables
   let username = DB_USERNAME,
     password = DB_PASSWORD,
@@ -70,7 +70,7 @@ function MongoUtils() {
   mu.cotizaciones.delete = (query) => {
     return mu.connect()
       .then(client => {
-        console.log("query-------------delete",query);
+        console.log("query-------------delete", query);
         const cotizaciones = client.db(dbName).collection("cotizaciones");
         return cotizaciones.deleteOne(query)
           .finally(() => client.close());
@@ -99,8 +99,8 @@ function MongoUtils() {
     mu.connect()
       .then(client => {
         const usuarios = client.db(dbName).collection("usuarios");
-        usuarios.findOne({username: query})
-          .then( (usuario, err) => {
+        usuarios.findOne({ username: query })
+          .then((usuario, err) => {
             cb(err, usuario);
           });
       });
