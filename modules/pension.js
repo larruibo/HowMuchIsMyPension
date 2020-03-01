@@ -15,15 +15,12 @@ function Pension() {
   mu.ibl = (cotizaciones) => {
     var acum =0;
     for( let c of cotizaciones ){
-      console.log(ipcActual);
-      console.log(c.ipc);
-      console.log(c.cotizacion);
       acum += c.cotizacion*(parseFloat(ipcActual)/c.ipc);
     }
     return acum/cotizaciones.length;
   };
 
-  mu.pension = (cotizaciones) => mu.ibl(cotizaciones)*mu.r(cotizaciones);
+  mu.pension = (cotizaciones) => mu.ibl(cotizaciones)*mu.r(cotizaciones)/100;
 
   return mu;
 }

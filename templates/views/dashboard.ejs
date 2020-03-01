@@ -43,8 +43,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Porcentaje de ingreso de liquidacion</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= pension.porcentaje.toFixed(2) %>%</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -60,8 +60,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pension Actualmente</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">$<%= pension.pension%></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -77,11 +77,10 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Porcentaje De Semanas
-                        Cotizadas</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Porcentaje De Meses Cotizados</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div id="value-progress-bar" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%= (100*cotizaciones.length/1300).toFixed(2) %></div>
+                          <div id="value-progress-bar" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><%= (100*cotizaciones.length/120).toFixed(2) %></div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
@@ -105,9 +104,9 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Cotizaciones Restantes
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Promedio Cotizado
                       </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= 1300-cotizaciones.length %></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><%= pension.promedio.toFixed(2) %></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
