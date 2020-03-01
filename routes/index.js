@@ -43,7 +43,7 @@ router.use(session({
   store: new MongoStore({ url: mongo.url, collection: "sessions" }),
   resave: false,
   saveUninitialized: true,
-  secret: SECRET,
+  // secret: SECRET,
   cookie: { expires : new Date(Date.now() + 900000) }
 }));
 
