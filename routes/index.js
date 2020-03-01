@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-//require("dotenv").config();
 
 let SECRET="";
+
 // Package and modules for authentication
 const session = require("express-session");
 const mongo = require("../database/MongoUtils.js");
