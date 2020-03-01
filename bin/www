@@ -5,17 +5,10 @@
  */
 
 var app = require("../app");
-var debug = require("debug")("howmuchismypension:server");
-var http = require("http");
 
 /**
  * Get port from environment and store in Express.
  */
-var port = (parseInt(process.env.PORT) || 8080);
-
-/**
- * Create HTTP server.
- */
-
+var port = (process.env.PORT || 8080);
 
 app.listen(port);
