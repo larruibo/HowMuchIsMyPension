@@ -13,11 +13,14 @@ cd HowMuchIsMyPension
 yarn install
 yarn start
 ```
+Server runs on 
+
 Expects a Mongo Server to be running on Mongo Atlas DataBase, and it uses a database called "PensionDB" with the collections "ipcs", "usuarios", "cotizaciones".
+If running locally, install MongoDB. To install it just go to: <a href="https://www.mongodb.com/download-center/community">MongoDB Community Server</a>
 
 ## Usage
-
-
+<h2> Link </h2>
+<a> https://how-much-is-my-pension.herokuapp.com/</a>
 ## Authors
 [Allan Roy Corinaldi Castaño](https://github.com/ar-corinaldi)
 
