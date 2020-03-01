@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 const mongo = require("../database/MongoUtils");
 const pension = require("../modules/pension");
-require("dotenv").config();
 
 /* GET users listing. */
 router.get("/", function (req, res) {
@@ -39,6 +38,7 @@ router.get("/", function (req, res) {
   }
 });
 
+// POST crea una cotizacion dado un usuario y la fecha
 router.post("/tables/agregarCot", function (req, res) {
   console.log("parameters", req.body);
   let anioMes = req.body.iMesAnio;
@@ -59,6 +59,7 @@ router.post("/tables/agregarCot", function (req, res) {
 
 });
 
+// POST elimina una cotizacion dado un usuario y la fecha
 router.post("/tables/eliminarCot", function (req, res) {
   console.log("parameters", req.body);
   console.log(req.body.anio_mes);
@@ -68,6 +69,7 @@ router.post("/tables/eliminarCot", function (req, res) {
     .finally(res.redirect("/dashboard/tables"));
 });
 
+// GET tables page
 router.get("/tables", function (req, res) {
   console.log(req.user);
   const user = req.user;
@@ -86,6 +88,7 @@ router.get("/tables", function (req, res) {
   }
 });
 
+// GET ipc page
 router.get("/ipc", function (req, res) {
   const data = [];
   res.render("ipc", {
@@ -93,6 +96,7 @@ router.get("/ipc", function (req, res) {
   });
 });
 
+// GET solo manda los datos del servidor de mongo
 router.get("/ipcs", function (req, res) {
   return mongo.ipcs.find({})
     .then(data => {
