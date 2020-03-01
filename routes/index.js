@@ -101,8 +101,6 @@ passport.deserializeUser(function (username, cb) {
 
 router.use(passport.initialize());
 router.use(passport.session());
-
-<<<<<<< HEAD
 router.post("/login", passport.authenticate("local",
   { failureRedirect: "/login", successRedirect: "/dashboard" }));
  
@@ -122,12 +120,10 @@ router.post("/register", (req, res ) => {
     .finally(
       res.redirect("login"));
 });
-=======
 // POST login page
 router.post("/login", passport.authenticate("local", { 
   failureRedirect: "/login", 
   successRedirect: "/dashboard",
 }));
->>>>>>> 117e2f0ac6db519f9c0e0d49ca0c242437a07f63
 
 module.exports = router;
