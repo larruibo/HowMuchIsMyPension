@@ -101,7 +101,25 @@ passport.deserializeUser(function (username, cb) {
 
 router.use(passport.initialize());
 router.use(passport.session());
+router.post("/login", passport.authenticate("local",
+  { failureRedirect: "/login", successRedirect: "/dashboard" }));
+ 
+router.post("/register", (req, res ) => {
+  console.log(req.body);
 
+  const saltHash = genPassword(req.body.password);
+    
+  const salt = saltHash.salt;
+  const hash = saltHash.hash;
+  const newUser = {
+    username: req.body.username,
+    hash: hash,
+    salt: salt
+  };
+  mongo.passport.insert(newUser)
+    .finally(
+      res.redirect("login"));
+});
 // POST login page
 router.post("/login", passport.authenticate("local", { 
   failureRedirect: "/login", 
