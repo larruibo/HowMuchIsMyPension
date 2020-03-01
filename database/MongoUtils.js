@@ -92,6 +92,14 @@ function MongoUtils() {
       });
   };
 
+  mu.passport.insert = (query) => {
+    return mu.connect()
+      .then(client => {
+        const usuarios = client.db(dbName).collection("usuarios");
+        return usuarios.insertOne(query).finally(() => client.close());
+      });
+  };
+
   mu.users.insert = (client, query) => {
     const usuarios = client.db(dbName).collection("usuarios");
     return usuarios.insertOne(query)
