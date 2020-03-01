@@ -8,6 +8,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "^2.6.9",
     "ejs": "^3.0.1",
@@ -18,7 +19,8 @@
     "mongodb": "^3.5.4",
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "uid-safe": "^2.1.5"
   },
   "keywords": [],
   "author": "Allan Corinaldi & Daniella Arteaga",

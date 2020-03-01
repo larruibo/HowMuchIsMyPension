@@ -5,15 +5,16 @@ function MongoUtils() {
 
   let username = process.env.DB_USERNAME,
     password = process.env.DB_PASSWORD,
-    dbName = process.env.DB_NAME;
+    dbName = process.env.DB_NAME,
+    url = `mongodb+srv://${username}:${password}@pensiondb-y5joy.mongodb.net/test?retryWrites=true&w=majority`;
 
   mu.dbName = (name) => arguments.length !== 0 ? ((mu.dbName = name), mu) : dbName;
   mu.port = (port) => arguments.length !== 0 ? ((mu.port = port), mu) : port;
   mu.hostname = (hostname) => arguments.length !== 0 ? ((mu.hostname = hostname), mu) : hostname;
-
+  mu.url = url;
   mu.connect = () => {
     const options = { useUnifiedTopology: true, useNewUrlParser: true };
-    const url = `mongodb+srv://${username}:${password}@pensiondb-y5joy.mongodb.net/test?retryWrites=true&w=majority`;
+    url = `mongodb+srv://${username}:${password}@pensiondb-y5joy.mongodb.net/test?retryWrites=true&w=majority`;
     const client = new MongoClient(url, options);
     return client.connect();
   };
@@ -69,10 +70,29 @@ function MongoUtils() {
     return cot.insertOne(query).toArray();
   };
 
-  mu.users= {};
-  mu.users.findOne =(client,query)=>{
-    const usuarios= client.db(dbName).collection("usuarios");
-    return usuarios.findOne(query).finally(()=> client.close());
+  mu.users = {};
+  mu.passport = {};
+
+  mu.passport.findOne = (query) => {
+    return mu.connect()
+      .then(client => {
+        const usuarios = client.db(dbName).collection("usuarios");
+        return usuarios.findOne(query).finally(() => client.close());
+      });
+  };
+
+  mu.passport.findById = (query, cb) => {
+    mu.connect()
+      .then(client => {
+        const usuarios = client.db(dbName).collection("usuarios");
+        console.log(query);
+        usuarios.findOne({username: query})
+          .then( (usuario, err) => {
+            console.log(err);
+            console.log(usuario);
+            cb(err, usuario);
+          });
+      });
   };
 
   mu.users.insert = (client, query) => {

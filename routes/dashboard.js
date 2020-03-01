@@ -5,6 +5,7 @@ var numeroCot = 0;
 
 /* GET users listing. */
 router.get("/", function (req, res) {
+  console.log(req.body);
   res.render("dashboard");
 });
 
