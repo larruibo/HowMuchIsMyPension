@@ -10,6 +10,7 @@ function MongoUtils() {
   console.log(DB_USERNAME);
   console.log(DB_PASSWORD);
   console.log(DB_NAME);
+  console.log("PUERTOO"+process.env.PORT);
   // Variables
   let username = DB_USERNAME,
     password = DB_PASSWORD,

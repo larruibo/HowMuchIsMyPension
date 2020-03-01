@@ -43,7 +43,7 @@ router.use(session({
   store: mongoStore,
   resave: false,
   saveUninitialized: true,
-  secret: "SECRET key",
+  secret: process.env.SECRET,
   cookie: { expires : new Date(Date.now() + 900000) }
 }));
 console.log("Se putea?");
