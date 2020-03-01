@@ -1,13 +1,11 @@
 var express = require("express");
 var router = express.Router();
-const uid = require("uid-safe");
 require("dotenv").config();
 
 
 // Package and modules for authentication
 const session = require("express-session");
 const mongo = require("../database/MongoUtils.js");
-const bodyParser = require("body-parser");
 const MongoStore = require("connect-mongo")(session);
 
 
