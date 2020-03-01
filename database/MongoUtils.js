@@ -59,6 +59,7 @@ function MongoUtils() {
   mu.cotizaciones.delete = (query) => {
     return mu.connect()
       .then(client => {
+        console.log("query-------------delete",query);
         const cotizaciones = client.db(dbName).collection("cotizaciones");
         return cotizaciones.deleteOne(query)
           .finally(() => client.close());

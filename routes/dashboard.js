@@ -7,7 +7,15 @@ var numeroCot = 0;
 router.get("/", function (req, res) {
   console.log(req.user);
   const user = req.user;
-  res.render("dashboard", {user});
+  if (!user) {
+    res.redirect("/login");
+  }
+  else {
+    mongo.cotizaciones.find()
+      .then(cotizaciones => {
+        res.render("dashboard", { user, cotizaciones });
+      });
+  }
 });
 
 router.post("/tables/agregarCot", function (req, res) {
@@ -19,11 +27,10 @@ router.post("/tables/agregarCot", function (req, res) {
     .then(cotizacion => {
       // insert en cotizaciones
       const obj = {
-        cotizacion: req.body.iCotizacion,
-        anio: anioMes[0],
-        mes: anioMes[1],
+        cotizacion: parseFloat(req.body.iCotizacion),
+        anio: parseInt(anioMes[0]),
+        mes: parseInt(anioMes[1]),
         ipc: parseFloat(cotizacion[0].indice),
-        semana_cotizada: numeroCot + 1,
         username: req.user.username
       };
       mongo.cotizaciones.insert(obj).finally(res.redirect("/dashboard/tables"));
@@ -36,21 +43,26 @@ router.post("/tables/eliminarCot", function (req, res) {
   console.log(req.body.anio_mes);
   const anioMes = req.body.anio_mes.split("-");
   // Query para obtener el ipc y la semana cotizada
-  mongo.cotizaciones.delete({ anio: anioMes[0], mes: anioMes[1] })
+  mongo.cotizaciones.delete({ anio: parseInt(anioMes[0]), mes: parseInt(anioMes[1]), username: req.user.username })
     .finally(res.redirect("/dashboard/tables"));
 });
 
 router.get("/tables", function (req, res) {
   console.log(req.user);
   const user = req.user;
-  mongo.cotizaciones.find({username: user.username})
-    .then(cotizaciones => {
-      numeroCot = cotizaciones.length;
-      return res.render("tables", {
-        cotizaciones,
-        user
+  if (!user) {
+    res.redirect("/login");
+  }
+  else {
+    mongo.cotizaciones.find({ username: user.username })
+      .then(cotizaciones => {
+        numeroCot = cotizaciones.length;
+        return res.render("tables", {
+          cotizaciones,
+          user
+        });
       });
-    });
+  }
 });
 
 router.get("/ipc", function (req, res) {
@@ -61,7 +73,6 @@ router.get("/ipc", function (req, res) {
 });
 
 router.get("/ipcs", function (req, res) {
-  console.log("llega");
   return mongo.ipcs.find({})
     .then(data => {
 
