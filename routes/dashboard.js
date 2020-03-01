@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 const mongo = require("../database/MongoUtils");
-var numeroCot = 0;
+const pension = require("../modules/pension");
+require("dotenv").config();
 
 /* GET users listing. */
 router.get("/", function (req, res) {
@@ -11,9 +12,29 @@ router.get("/", function (req, res) {
     res.redirect("/login");
   }
   else {
-    mongo.cotizaciones.find()
+
+    mongo.cotizaciones.find({ username: user.username })
       .then(cotizaciones => {
-        res.render("dashboard", { user, cotizaciones });
+        console.log("Cotizacionesss", cotizaciones[0]);
+        console.log(typeof (cotizaciones[0]));
+        let val = 0,
+          ibl = 0,
+          r = 0,
+          s = 0;
+        if (cotizaciones) {
+          val = pension.pension(cotizaciones);
+          ibl = pension.ibl(cotizaciones);
+          r = pension.r(cotizaciones);
+          s = pension.salariosMinimos(cotizaciones);
+        }
+        console.log(val);
+        const pensionObj = {
+          pension: formatNumber(val),
+          promedio: ibl,
+          porcentaje: r,
+          salariosMinimos: s,
+        };
+        res.render("dashboard", { user, cotizaciones, pension: pensionObj });
       });
   }
 });
@@ -54,9 +75,9 @@ router.get("/tables", function (req, res) {
     res.redirect("/login");
   }
   else {
+    console.log(user.username);
     mongo.cotizaciones.find({ username: user.username })
       .then(cotizaciones => {
-        numeroCot = cotizaciones.length;
         return res.render("tables", {
           cotizaciones,
           user
@@ -80,6 +101,10 @@ router.get("/ipcs", function (req, res) {
     });
 });
 
-
+// Format to my numbers
+function formatNumber(num) {
+  const numF = num.toFixed(2);
+  return numF.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
 
 module.exports = router;
