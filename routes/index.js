@@ -1,9 +1,6 @@
 var express = require("express");
 var router = express.Router();
 
-let SECRET=process.env.SECRET;
-console.log(SECRET);
-
 // Package and modules for authentication
 const session = require("express-session");
 const mongo = require("../database/MongoUtils.js");
@@ -18,6 +15,7 @@ const crypto = require("crypto");
 
 /* GET home page. */
 router.get("/", function (req, res) {
+  console.log("ROUTERRRR INDEX");
   res.render("index");
 });
 
@@ -38,14 +36,17 @@ router.get("/register", function (req, res) {
 });
 
 console.log(mongo.url);
+const mongoStore = new MongoStore({ url: mongo.url, collection: "sessions" });
+console.log();
 // Session config
 router.use(session({
-  store: new MongoStore({ url: mongo.url, collection: "sessions" }),
+  store: mongoStore,
   resave: false,
   saveUninitialized: true,
-  // secret: SECRET,
+  secret: "SECRET key",
   cookie: { expires : new Date(Date.now() + 900000) }
 }));
+console.log("Se putea?");
 
 //Passport config
 function validPassword(password, hash, salt) {
