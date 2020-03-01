@@ -1,7 +1,6 @@
 "use strict";
 // Render the page, appendChild tr's in a tbody
 const renderPage = (data) => {
-  console.log(data);
   // tbody element
   let tbody = document.getElementById("content-table");
   // Iterating over every line of the json file

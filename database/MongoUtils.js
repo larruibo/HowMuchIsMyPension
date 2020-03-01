@@ -7,12 +7,6 @@ function MongoUtils() {
     DB_PASSWORD = process.env.DB_PASSWORD,
     DB_NAME = process.env.DB_NAME;
 
-  console.log(DB_USERNAME);
-  console.log(DB_PASSWORD);
-  console.log(DB_NAME);
-  console.log("PUERTO " + process.env.PORT);
-  console.log(typeof (process.env.PORT));
-
   // Variables
   let username = DB_USERNAME,
     password = DB_PASSWORD,
@@ -35,9 +29,8 @@ function MongoUtils() {
   mu.ipcs.find = query => {
     return mu.connect()
       .then((client) => {
-        console.log("getting client details");
         const ipcs = client.db(dbName).collection("ipcs");
-        console.log("Querrying", query);
+        console.log("Querrying ipcs", query);
         return ipcs.find(query)
           .toArray()
           .finally(() => client.close());
@@ -50,9 +43,8 @@ function MongoUtils() {
   mu.cotizaciones.find = query => {
     return mu.connect()
       .then((client) => {
-        console.log("getting Cotizaciones");
         const cotizaciones = client.db(dbName).collection("cotizaciones");
-        console.log("Querrying", query);
+        console.log("Querrying cotizaciones", query);
         return cotizaciones.find(query)
           .toArray()
           .finally(() => client.close());
@@ -63,6 +55,7 @@ function MongoUtils() {
   mu.cotizaciones.insert = (query) => {
     return mu.connect()
       .then(client => {
+        console.log("Inserting cotizacion", query);
         const cotizaciones = client.db(dbName).collection("cotizaciones");
         return cotizaciones.insertOne(query)
           .finally(() => client.close());
@@ -73,7 +66,7 @@ function MongoUtils() {
   mu.cotizaciones.delete = (query) => {
     return mu.connect()
       .then(client => {
-        console.log("query-------------delete", query);
+        console.log("Deleting a cotizacion", query);
         const cotizaciones = client.db(dbName).collection("cotizaciones");
         return cotizaciones.deleteOne(query)
           .finally(() => client.close());

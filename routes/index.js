@@ -35,18 +35,15 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-console.log(mongo.url);
 const mongoStore = new MongoStore({ url: mongo.url, collection: "sessions" });
-console.log();
 // Session config
 router.use(session({
   store: mongoStore,
   resave: false,
   saveUninitialized: true,
   secret: process.env.SECRET,
-  cookie: { expires : new Date(Date.now() + 900000) }
+  cookie: { expires: new Date(Date.now() + 900000) }
 }));
-console.log("Se putea?");
 
 //Passport config
 function validPassword(password, hash, salt) {
@@ -105,26 +102,30 @@ router.use(passport.initialize());
 router.use(passport.session());
 router.post("/login", passport.authenticate("local",
   { failureRedirect: "/login", successRedirect: "/dashboard" }));
- 
-router.post("/register", (req, res ) => {
+
+router.post("/register", (req, res) => {
   console.log(req.body);
 
   const saltHash = genPassword(req.body.password);
-    
-  const salt = saltHash.salt;
-  const hash = saltHash.hash;
+
+  const salt = saltHash.salt,
+    hash = saltHash.hash,
+    correo = req.body.email,
+    name = req.body.name;
   const newUser = {
     username: req.body.username,
     hash: hash,
-    salt: salt
+    salt: salt,
+    correo: correo,
+    name: name
   };
   mongo.passport.insert(newUser)
     .finally(
       res.redirect("login"));
 });
 // POST login page
-router.post("/login", passport.authenticate("local", { 
-  failureRedirect: "/login", 
+router.post("/login", passport.authenticate("local", {
+  failureRedirect: "/login",
   successRedirect: "/dashboard",
 }));
 
