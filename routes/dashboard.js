@@ -7,7 +7,10 @@ var numeroCot = 0;
 router.get("/", function (req, res) {
   console.log(req.user);
   const user = req.user;
-  res.render("dashboard", {user});
+  mongo.cotizaciones.find()
+    .then(cotizaciones => {
+      res.render("dashboard", {user, cotizaciones});
+    });
 });
 
 router.post("/tables/agregarCot", function (req, res) {
@@ -19,9 +22,9 @@ router.post("/tables/agregarCot", function (req, res) {
     .then(cotizacion => {
       // insert en cotizaciones
       const obj = {
-        cotizacion: req.body.iCotizacion,
-        anio: anioMes[0],
-        mes: anioMes[1],
+        cotizacion: parseFloat(req.body.iCotizacion),
+        anio: parseInt(anioMes[0]),
+        mes: parseInt(anioMes[1]),
         ipc: parseFloat(cotizacion[0].indice),
         semana_cotizada: numeroCot + 1,
         username: req.user.username
