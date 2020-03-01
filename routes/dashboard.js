@@ -14,17 +14,15 @@ router.get("/", function (req, res) {
 
     mongo.cotizaciones.find({ username: user.username })
       .then(cotizaciones => {
-        console.log("Cotizacionesss", cotizaciones[0]);
-        console.log(typeof (cotizaciones[0]));
         let val = 0,
           ibl = 0,
           r = 0,
           s = 0;
         if (cotizaciones) {
-          val = pension.pension(cotizaciones);
-          ibl = pension.ibl(cotizaciones);
-          r = pension.r(cotizaciones);
-          s = pension.salariosMinimos(cotizaciones);
+          val = val || pension.pension(cotizaciones);
+          ibl = ibl || pension.ibl(cotizaciones);
+          r = r || pension.r(cotizaciones);
+          s = s || pension.salariosMinimos(cotizaciones);
         }
         console.log(val);
         const pensionObj = {
