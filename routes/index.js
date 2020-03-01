@@ -15,7 +15,6 @@ const crypto = require("crypto");
 
 /* GET home page. */
 router.get("/", function (req, res) {
-  console.log("ROUTERRRR INDEX");
   res.render("index");
 });
 
