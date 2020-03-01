@@ -45,4 +45,8 @@ app.get("*", (req, res) => {
   res.render("not_found_404");
 });
 
+var port = (process.env.PORT || 8080);
+
+app.listen(port);
+
 module.exports = app;
