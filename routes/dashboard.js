@@ -22,7 +22,7 @@ router.get("/", function (req, res) {
           val = val || pension.pension(cotizaciones);
           ibl = isNaN(pension.ibl(cotizaciones)) ? 0: pension.ibl(cotizaciones);
           r = isNaN(pension.r(cotizaciones))? 0: pension.r(cotizaciones);
-          s = isNaN(pension.s(cotizaciones))? 0:pension.s(cotizaciones);
+          s = isNaN(pension.salariosMinimos(cotizaciones))? 0:pension.salariosMinimos(cotizaciones);
         }
         console.log(val);
         const pensionObj = {
