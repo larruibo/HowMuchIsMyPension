@@ -6,6 +6,10 @@ function MongoUtils() {
   let DB_USERNAME= process.env.DB_USERNAME,
     DB_PASSWORD=process.env.DB_PASSWORD,
     DB_NAME=process.env.PensionDB;
+
+    console.log(DB_USERNAME);
+    console.log(DB_PASSWORD);
+    console.log(DB_NAME);
   // Variables
   let username = DB_USERNAME,
     password = DB_PASSWORD,
