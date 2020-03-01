@@ -1,6 +1,6 @@
 # HowMuchIsMyPension
 
-HowMuchIsMyPension is a project where you can login and register your quotes for your pension.
+HowMuchIsMyPension is a project where you can register your quotes for your pension and get all the details in the quotation process like the pension you are getting today and number of months left get the pension. This is only useful if you are in Colombia using the pension system of colsubsidios.
 
 ## Installation
 
