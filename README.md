@@ -1,6 +1,6 @@
 # HowMuchIsMyPension
 
-HowMuchIsMyPension is a project where you can register your quotes for your pension and get all the details in the quotation process like the pension you are getting today and number of months left get the pension. This is only useful if you are in Colombia using the pension system of colsubsidios.
+HowMuchIsMyPension is a project where you can register your pension plan fees and get all the details in the quotation process like the pension you are getting today and number of months left to get the expected amount. This is only useful if you are in Colombia using the pension system of colsubsidios.
 
 ## Installation
 
@@ -21,7 +21,7 @@ Expects a Mongo Server to be running on Mongo Atlas DataBase, and it uses a data
 ## Authors
 [Allan Roy Corinaldi Castaño](https://github.com/ar-corinaldi)
 
-[Daniella Artega](https://github.com/dartm05)
+[Daniella Arteaga Mendoza](https://github.com/dartm05)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
