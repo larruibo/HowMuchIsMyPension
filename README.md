@@ -8,6 +8,7 @@ HowMuchIsMyPension is a project where you can register your pension plan fees an
 
 
 <br>
+
 ## Requirements
 
 NodeJs
@@ -32,6 +33,10 @@ yarn install
 yarn start
 ```
 Server runs on http://localhost:8080
+<h2>IMPORTANT!</h2>
+
+In order to run locally you must create a .env file containing any environment variables;  DB_USERNAME= <database_Username>,
+DB_PASSWORD=<databas_password>, DB_NAME=<naemOfYourDatabase> , SECRET=<secretSessionKey>. This is going to be required by the dotenv module.
 
 <br>
 
@@ -39,7 +44,9 @@ Server runs on http://localhost:8080
 <h2> Link </h2>
 <a> https://how-much-is-my-pension.herokuapp.com/</a>
 <br>
+
 ## Authors
+
 [Allan Roy Corinaldi Castaño](https://github.com/ar-corinaldi)
 
 [Daniella Arteaga Mendoza](https://github.com/dartm05)
