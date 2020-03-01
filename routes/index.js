@@ -1,8 +1,8 @@
 var express = require("express");
 var router = express.Router();
-require("dotenv").config();
+//require("dotenv").config();
 
-
+let SECRET="";
 // Package and modules for authentication
 const session = require("express-session");
 const mongo = require("../database/MongoUtils.js");
@@ -42,7 +42,7 @@ router.use(session({
   store: new MongoStore({ url: mongo.url, collection: "sessions" }),
   resave: false,
   saveUninitialized: true,
-  secret: process.env.SECRET,
+  secret: SECRET,
   cookie: { expires : new Date(Date.now() + 900000) }
 }));
 

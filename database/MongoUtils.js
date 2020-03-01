@@ -1,14 +1,16 @@
 const MongoClient = require("mongodb").MongoClient;
-require("dotenv").config();
+//require("dotenv").config();
 
 // Modulo utilizado para la base de datos
 function MongoUtils() {
   const mu = {};
-
+  let DB_USERNAME= "",
+    DB_PASSWORD="",
+    DB_NAME="";
   // Variables
-  let username = process.env.DB_USERNAME,
-    password = process.env.DB_PASSWORD,
-    dbName = process.env.DB_NAME,
+  let username = DB_USERNAME,
+    password = DB_PASSWORD,
+    dbName = DB_NAME,
     url = `mongodb+srv://${username}:${password}@pensiondb-y5joy.mongodb.net/test?retryWrites=true&w=majority`;
   // Getters
   mu.dbName = (name) => arguments.length !== 0 ? ((mu.dbName = name), mu) : dbName;
