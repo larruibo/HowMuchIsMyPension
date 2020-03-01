@@ -17,13 +17,6 @@ Expects a Mongo Server to be running on Mongo Atlas DataBase, and it uses a data
 
 ## Usage
 
-```python
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
-```
 
 ## Authors
 [Allan Roy Corinaldi Castaño](https://github.com/ar-corinaldi)
