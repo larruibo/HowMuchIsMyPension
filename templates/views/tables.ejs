@@ -4,6 +4,7 @@
 <head>
 
   <%- include("../partials/dashboardHeaders.ejs") %>
+  <link href="../stylesheets/userPage.css" rel="stylesheet">
 
 </head>
 
@@ -67,7 +68,8 @@
                       <input class="ml-3" id="mes_anio_delete" name="anio_mes" type="month" value="2020-01"
                         min="1954-01" max="2020-01">
                     </div>
-                    <button id="butQuitar" type="submit" class="form-group m-0 font-weight-bold text-primary">Quitar</button>
+                    <button id="butQuitar" type="submit"
+                      class="form-group m-0 font-weight-bold text-primary">Quitar</button>
                 </form>
               </div>
             </div>
@@ -132,7 +134,7 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-  
+
   <%- include("../partials/scriptsBootstrap.ejs") %>
 
   <script src="/scripts/addingInput.js"></script>
