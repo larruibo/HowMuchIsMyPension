@@ -3,9 +3,9 @@ const MongoClient = require("mongodb").MongoClient;
 // Modulo utilizado para la base de datos
 function MongoUtils() {
   const mu = {};
-  let DB_USERNAME= "",
-    DB_PASSWORD="",
-    DB_NAME="";
+  let DB_USERNAME= process.env.DB_USERNAME,
+    DB_PASSWORD=process.env.DB_PASSWORD,
+    DB_NAME=process.env.PensionDB;
   // Variables
   let username = DB_USERNAME,
     password = DB_PASSWORD,

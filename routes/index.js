@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-let SECRET="";
+let SECRET=process.env.SECRET;
 
 // Package and modules for authentication
 const session = require("express-session");
