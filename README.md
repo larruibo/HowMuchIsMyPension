@@ -1,6 +1,6 @@
 # HowMuchIsMyPension
 
-HowMuchIsMyPension is a project where you can register your pension plan fees and get all the details in the quotation process like the pension you are getting today and number of months left to get the expected amount. This is only useful if you are in Colombia using the pension system of colsubsidios.
+HowMuchIsMyPension is a project where you can register your pension plan fees and get all the details in the quotation process like the pension you are getting today and number of months left to get the expected amount. This is only useful if you are in Colombia.
 
 <img width="1440" alt="Captura de pantalla 2020-03-01 a la(s) 6 46 30 p  m" src="https://user-images.githubusercontent.com/26877363/75636461-0b1c4400-5bed-11ea-8fc3-e81d1e76cdb2.png">
 
@@ -49,14 +49,14 @@ DB_PASSWORD=<databas_password>, DB_NAME=<naemOfYourDatabase> , SECRET=<secretSes
 
 <br>
 <h2> Link </h2>
-<a> https://how-much-is-my-pension.herokuapp.com/</a>
+<a>https://how-much-is-my-pension.herokuapp.com</a>
 <br>
 
 ## Authors
 
-[Allan Roy Corinaldi Castaño](https://github.com/ar-corinaldi)
+[Allan Roy Corinaldi Castaño]<a>(https://github.com/ar-corinaldi)</a>
 
-[Daniella Arteaga Mendoza](https://github.com/dartm05)
+[Daniella Arteaga Mendoza]<a>(https://github.com/dartm05)</a>
 
 <br>
 
