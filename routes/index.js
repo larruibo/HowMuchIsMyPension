@@ -51,7 +51,7 @@ passport.use("local-signup", new LocalStrategy({
 
   // find a user whose email is the same as the forms email
   // we are checking to see if the user trying to login already exists
-  mongo.passport.find({ username: username }, function (err, username) {
+  mongo.passport.findOne({ username: username }), function (err, username) {
     // if there are any errors, return the error
     if (err)
       return done(err);
@@ -71,6 +71,7 @@ passport.use("local-signup", new LocalStrategy({
 
       // save the user
       mongo.passport.insert(newUser).then(function (err) {
+        console.log("THIS IS ERR", err);
         if (err)
           throw err;
         return done(null, newUser);
