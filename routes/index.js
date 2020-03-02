@@ -45,35 +45,28 @@ passport.use(new LocalStrategy(
       });
   }));
 
-passport.use("local-signup", new LocalStrategy({
-  passReqToCallback: true // allows us to pass back the entire request to the callback
-}, function (req, username, password, done) {
+passport.use("local-signup", new LocalStrategy(function (username, password, done) {
 
   // find a user whose email is the same as the forms email
   // we are checking to see if the user trying to login already exists
-  mongo.passport.findOne({ username: username }, function (err, username) {
-    // if there are any errors, return the error
-    if (err)
-      return done(err);
-
+  mongo.passport.findOne({ username: username }, function (user) {
     // check to see if theres already a user with that email
-    if (username) {
-      return done(null, false, req.flash("signupMessage", "That username is already taken."));
+    if (user) {
+      return done(null, false);
     } else {
-
       // if there is no user with that email
       // create the user
       var newUser = {};
-
       // set the user's local credentials
       newUser.username = username;
-      newUser.password = genPassword(password);
-
+      const password = genPassword(password);
+      newUser.hash = password.hash;
+      newUser.salt = password.salt;
       // save the user
-      mongo.passport.insert(newUser).then(function (err) {
-        console.log("THIS IS ERR", err);
-        if (err)
-          throw err;
+      mongo.passport.insert(newUser).then(function (user) {
+        console.log("THIS IS ERR", user);
+        if (user)
+          throw user;
         return done(null, newUser);
       });
     }
