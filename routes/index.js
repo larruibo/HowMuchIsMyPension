@@ -90,7 +90,7 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-router.post("/register", (req, res, next) => {
+router.post("/register", (req, res) => {
 
   const saltHash = genPassword(req.body.password);
 
