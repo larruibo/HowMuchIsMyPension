@@ -90,7 +90,10 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-router.post("/register", (err, req, res ) => {
+router.post("/register", passport.authenticate("local", {
+  failureRedirect: "/login",
+  successRedirect: "/dashboard",
+}), (err, req, res) => {
   console.log(req.body);
   console.log(err);
   console.log(res);
