@@ -6,7 +6,16 @@ HowMuchIsMyPension is a project where you can register your pension plan fees an
 
 <img width="1440" alt="Captura de pantalla 2020-03-01 a la(s) 6 46 00 p  m" src="https://user-images.githubusercontent.com/26877363/75636464-0fe0f800-5bed-11ea-9e8a-7c88f0c16ded.png">
 
-
+<h2> Technologies </h2>
+<ul>
+  <li>JavaScript</li>
+  <li>MongoDB</li>
+  <li>Express</li>
+  <li>NodeJs</li>
+  <li>PassportJS</li>
+  <li>HTML5</li>
+  <li>CSS</li>
+  </ul>
 <br>
 
 ## Requirements
