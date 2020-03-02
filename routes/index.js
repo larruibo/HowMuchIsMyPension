@@ -45,6 +45,41 @@ passport.use(new LocalStrategy(
       });
   }));
 
+passport.use("local-signup", new LocalStrategy({
+  passReqToCallback: true // allows us to pass back the entire request to the callback
+}, function (req, username, password, done) {
+
+  // find a user whose email is the same as the forms email
+  // we are checking to see if the user trying to login already exists
+  mongo.passport.find({ username: username }, function (err, username) {
+    // if there are any errors, return the error
+    if (err)
+      return done(err);
+
+    // check to see if theres already a user with that email
+    if (username) {
+      return done(null, false, req.flash("signupMessage", "That username is already taken."));
+    } else {
+
+      // if there is no user with that email
+      // create the user
+      var newUser = {};
+
+      // set the user's local credentials
+      newUser.username = username;
+      newUser.password = genPassword(password);
+
+      // save the user
+      mongo.passport.insert(newUser).then(function (err) {
+        if (err)
+          throw err;
+        return done(null, newUser);
+      });
+    }
+  });
+}));
+
+
 passport.serializeUser(function (user, cb) {
   console.log("serialize");
   cb(null, user.username);
@@ -90,25 +125,31 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-router.post("/register", (req, res) => {
-  console.log(req.body);
+router.post("/register", passport.authenticate("local.signup", {
+  successRedirect: "/dashboard",
+  failuerRedirect: "/login",
+  failuerFlash: true
+}));
 
-  const saltHash = genPassword(req.body.password);
+// router.post("/register", (req, res) => {
+//   console.log(req.body);
 
-  const salt = saltHash.salt,
-    hash = saltHash.hash,
-    correo = req.body.email,
-    name = req.body.name;
-  const newUser = {
-    username: req.body.username,
-    hash: hash,
-    salt: salt,
-    correo: correo,
-    name: name
-  };
-  mongo.passport.insert(newUser)
-    .finally(res.redirect("/dashboard"));
-});
+//   const saltHash = genPassword(req.body.password);
+
+//   const salt = saltHash.salt,
+//     hash = saltHash.hash,
+//     correo = req.body.email,
+//     name = req.body.name;
+//   const newUser = {
+//     username: req.body.username,
+//     hash: hash,
+//     salt: salt,
+//     correo: correo,
+//     name: name
+//   };
+//   mongo.passport.insert(newUser)
+//     .finally(res.redirect("/dashboard"));
+// });
 
 // Helper functiona
 function validPassword(password, hash, salt) {
