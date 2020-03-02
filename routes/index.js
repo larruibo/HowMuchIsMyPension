@@ -120,12 +120,7 @@ router.post("/register", (req, res) => {
   };
   mongo.passport.insert(newUser)
     .finally(
-      res.redirect("login"));
+      res.redirect("dashboard"));
 });
-// POST login page
-router.post("/login", passport.authenticate("local", {
-  failureRedirect: "/login",
-  successRedirect: "/dashboard",
-}));
 
 module.exports = router;
