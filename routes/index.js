@@ -128,8 +128,8 @@ router.get("/register", function (req, res) {
 
 router.post("/register", passport.authenticate("local-signup", {
   successRedirect: "/dashboard",
-  failuerRedirect: "/login",
-  failuerFlash: true
+  failureRedirect: "/login",
+  failureFlash: true
 }));
 
 // router.post("/register", (req, res) => {
