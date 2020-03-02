@@ -90,8 +90,7 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-router.post("/register", (req, res) => {
-  console.log(req.body);
+router.post("/register", (req, res, next) => {
 
   const saltHash = genPassword(req.body.password);
 
@@ -107,9 +106,10 @@ router.post("/register", (req, res) => {
     name: name
   };
   mongo.passport.insert(newUser)
-    .finally((user) => {
-      req.logIn((user) => {
-        res.redirect("/dashboard");
+    .finally(() => {
+      req.logIn((err) => {
+        if (err) { return next(err); }
+        return res.redirect("/dashboard");
       });
     }, (err) => console.log(err));
 });
