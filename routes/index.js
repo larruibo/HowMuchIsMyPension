@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+require("dotenv").config();
 
 // Package and modules for authentication
 const session = require("express-session");
@@ -33,7 +34,7 @@ router.get("/logout", function (req, res) {
 router.get("/register", function (req, res) {
   res.render("register");
 });
-
+console.log(process.env.SECRET);
 const mongoStore = new MongoStore({ url: mongo.url, collection: "sessions" });
 // Session config
 router.use(session({

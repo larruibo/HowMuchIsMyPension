@@ -1,4 +1,5 @@
 const MongoClient = require("mongodb").MongoClient;
+require("dotenv").config();
 
 // Modulo utilizado para la base de datos
 function MongoUtils() {

@@ -2,9 +2,11 @@ var express = require("express");
 var router = express.Router();
 const mongo = require("../database/MongoUtils");
 const pension = require("../modules/pension");
+require("dotenv").config();
 
 /* GET users listing. */
 router.get("/", function (req, res) {
+  console.log(req);
   console.log(req.user);
   const user = req.user;
   if (!user) {

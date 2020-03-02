@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // Modulo utilizado para los calculos de la pension
 function Pension() {
   const mu = {};
