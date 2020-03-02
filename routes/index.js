@@ -6,34 +6,12 @@ const session = require("express-session");
 const mongo = require("../database/MongoUtils.js");
 const MongoStore = require("connect-mongo")(session);
 
-
-
 // Passport
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const crypto = require("crypto");
 
-/* GET home page. */
-router.get("/", function (req, res) {
-  res.render("index");
-});
 
-// GET login page
-router.get("/login", function (req, res) {
-  res.render("login");
-});
-
-// GET logout page
-router.get("/logout", function (req, res) {
-  res.clearCookie("connect.sid");
-  res.redirect("/");
-});
-
-// GET register page
-router.get("/register", function (req, res) {
-  res.render("register");
-});
-console.log(process.env.SECRET);
 const mongoStore = new MongoStore({ url: mongo.url, collection: "sessions" });
 // Session config
 router.use(session({
@@ -44,23 +22,7 @@ router.use(session({
   cookie: { expires: new Date(Date.now() + 900000) }
 }));
 
-//Passport config
-function validPassword(password, hash, salt) {
-  var hashVerify = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
-  return hash === hashVerify;
-}
-
-// Password generator for registered users
-function genPassword(password) {
-  var salt = crypto.randomBytes(32).toString("hex");
-  var genHash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
-
-  return {
-    salt: salt,
-    hash: genHash
-  };
-}
-
+// PASSPORT CONFIG
 // Local Strategy
 passport.use(new LocalStrategy(
   function (username, password, cb) {
@@ -100,6 +62,34 @@ passport.deserializeUser(function (username, cb) {
 router.use(passport.initialize());
 router.use(passport.session());
 
+// ROUTES
+
+/* GET home page. */
+router.get("/", function (req, res) {
+  res.render("index");
+});
+
+// GET login page
+router.get("/login", function (req, res) {
+  res.render("login");
+});
+
+router.post("/login", passport.authenticate("local", {
+  failureRedirect: "/login",
+  successRedirect: "/dashboard",
+}));
+
+// GET logout page
+router.get("/logout", function (req, res) {
+  res.clearCookie("connect.sid");
+  res.redirect("/");
+});
+
+// GET register page
+router.get("/register", function (req, res) {
+  res.render("register");
+});
+
 router.post("/register", (req, res) => {
   console.log(req.body);
 
@@ -120,9 +110,22 @@ router.post("/register", (req, res) => {
     .finally(
       res.redirect("dashboard"));
 });
-router.post("/login", passport.authenticate("local", {
-  failureRedirect: "/login",
-  successRedirect: "/dashboard",
-}));
+
+// Helper functiona
+function validPassword(password, hash, salt) {
+  var hashVerify = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
+  return hash === hashVerify;
+}
+
+// Password generator for registered users
+function genPassword(password) {
+  var salt = crypto.randomBytes(32).toString("hex");
+  var genHash = crypto.pbkdf2Sync(password, salt, 10000, 64, "sha512").toString("hex");
+
+  return {
+    salt: salt,
+    hash: genHash
+  };
+}
 
 module.exports = router;
