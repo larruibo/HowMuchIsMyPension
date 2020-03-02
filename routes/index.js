@@ -108,7 +108,7 @@ router.post("/register", (req, res) => {
   };
   mongo.passport.insert(newUser)
     .finally((user) => {
-      req.login((user) => {
+      req.logIn((user) => {
         res.redirect("/dashboard");
       });
     }, (err) => console.log(err));
