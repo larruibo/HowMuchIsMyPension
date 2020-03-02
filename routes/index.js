@@ -99,8 +99,6 @@ passport.deserializeUser(function (username, cb) {
 
 router.use(passport.initialize());
 router.use(passport.session());
-router.post("/login", passport.authenticate("local",
-  { failureRedirect: "/login", successRedirect: "/dashboard" }));
 
 router.post("/register", (req, res) => {
   console.log(req.body);
@@ -122,5 +120,9 @@ router.post("/register", (req, res) => {
     .finally(
       res.redirect("dashboard"));
 });
+router.post("/login", passport.authenticate("local", {
+  failureRedirect: "/login",
+  successRedirect: "/dashboard",
+}));
 
 module.exports = router;
