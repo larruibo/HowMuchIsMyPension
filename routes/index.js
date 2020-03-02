@@ -125,7 +125,7 @@ router.get("/register", function (req, res) {
   res.render("register");
 });
 
-router.post("/register", passport.authenticate("local.signup", {
+router.post("/register", passport.authenticate("local-signup", {
   successRedirect: "/dashboard",
   failuerRedirect: "/login",
   failuerFlash: true
