@@ -39,8 +39,6 @@ In order to run locally you must create a .env file containing any environment v
 DB_PASSWORD=<databas_password>, DB_NAME=<naemOfYourDatabase> , SECRET=<secretSessionKey>. This is going to be required by the dotenv module.
 
 <br>
-
-## Usage
 <h2> Link </h2>
 <a> https://how-much-is-my-pension.herokuapp.com/</a>
 <br>
