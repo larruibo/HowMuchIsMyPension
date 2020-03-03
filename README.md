@@ -1,3 +1,5 @@
+<!-- Luis Ruiz: Como comentarios generales, me gustó mucho su aplicación. Intenté usarla, pero por alguna razón una vez pude y el resto de veces tuve problemas. Tal vez estaba usando nombres de usuarios que ya existían, o algo así y por eso no me dejaba registrar. Creo que sería bueno poner alguna alerta que me diga si hubo algún problema en el registro o el login. Cuando la pude utilizar, me gustó mucho como cargaron todos los datos del IPC y cómo variaban los valores dependiendo de lo que uno seleccionara. Me gustaron mucho las gráficas que usaron para mostrar el avance y lo que faltaba para la pensión. En general, me pareció un muy buen trabajo --> 
+
 # HowMuchIsMyPension
 
 HowMuchIsMyPension is a project where you can register your pension plan fees and get all the details in the quotation process like the pension you are getting today and number of months left to get the expected amount. This is only useful if you are in Colombia.
